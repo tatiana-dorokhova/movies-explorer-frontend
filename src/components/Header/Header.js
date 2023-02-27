@@ -26,19 +26,23 @@ function Header(props) {
   return (
     <header className="header section">
       <img className="header__logo" src={props.src} alt={props.alt} />
-      <div className="header_buttons-block">
+      <div className="header__buttons-block">
         {location.pathname === '/' && (
-        <>
-          <Link to="/sign-up" className="header__link">
-            Регистрация
-          </Link>
-          <button type="button" className="header__button" onClick={props.onSignOut}>
-            Войти
-          </button>
-        </>
+          <>
+            <Link to="/sign-up" className="header__link">
+              Регистрация
+            </Link>
+            <button
+              type="button"
+              className="header__button"
+              onClick={props.onSignIn}
+            >
+              Войти
+            </button>
+          </>
         )}
       </div>
-      
+
       {/* <div className="header__info-panel">
         {location.pathname === '/sign-up' && (
           <Link to="/sign-in" className="header__link">

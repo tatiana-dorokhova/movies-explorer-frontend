@@ -16,7 +16,7 @@
   padding-left: 70px;
 }
 
-.header_buttons-block {
+.header__buttons-block {
   display: flex;
   align-items: center;
   padding-right: 70px;
@@ -28,6 +28,7 @@
   font-size: 12px;
   line-height: 16px;
   text-decoration: none;
+  color: black;
 }
 
 .header__button {
