@@ -1,0 +1,76 @@
+.about-project {
+  width: 100%;
+  padding: 110px 70px;
+}
+
+.about-project__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid black;
+  padding-bottom: 23px;
+  letter-spacing: -0.04em;
+}
+
+.about-project__columns {
+  display: flex;
+  justify-content: left;
+  padding-top: 70px;
+  padding-bottom: 110px;
+}
+
+.about-project__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-project__column-title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  padding-bottom: 26px;
+}
+
+.about-project__column-content {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.about-project__stages {
+  display: flex;
+}
+
+.about-project__stage {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 9px 0;
+}
+
+.about-project_dark {
+  width: calc(100% / 5);
+  background-color: black;
+  color: white;
+}
+
+.about-project_light {
+  width: calc(100% / 5 * 4);
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.about-project__caption {
+  width: 100%;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #a0a0a0;
+  background-color: white;
+  padding-top: 14px;
+}
