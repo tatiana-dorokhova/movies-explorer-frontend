@@ -19,6 +19,8 @@ function AboutMe(props) {
           <a
             className="about-me__github-link"
             href="https://github.com/tatiana-dorokhova"
+            target="_blank"
+            rel="noreferrer"
           >
             Github
           </a>

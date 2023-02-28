@@ -6,6 +6,7 @@ import Header from './Header/Header';
 import Main from './Main/Main';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import Footer from './Footer/Footer';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
           </Routes>
+          <Footer />
         </div>
       </CurrentUserContext.Provider>
     </>

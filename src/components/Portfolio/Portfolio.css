@@ -14,6 +14,7 @@
 
 .portfolio__list {
   margin: 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -23,5 +24,17 @@
   line-height: 50px;
   letter-spacing: -0.04em;
   border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 19px;
+  padding: 21px 0 19px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio__item:last-of-type {
+  border-bottom: none;
+  padding-bottom: 125px;
+}
+
+.portfolio__link {
+  text-decoration: none;
+  color: black;
 }

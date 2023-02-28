@@ -6,9 +6,24 @@ function Portfolio(props) {
     <section className="portfolio">
       <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__list">
-        <li className="portfolio__item">Статичный сайт</li>
-        <li className="portfolio__item">Адаптивный сайт</li>
-        <li className="portfolio__item">Одностраничное приложение</li>
+        <li className="portfolio__item">
+          <div>Статичный сайт</div>
+          <a className="portfolio__link" href="#">
+            ↗
+          </a>
+        </li>
+        <li className="portfolio__item">
+          <div>Адаптивный сайт</div>
+          <a className="portfolio__link" href="#">
+            ↗
+          </a>
+        </li>
+        <li className="portfolio__item">
+          <div>Одностраничное приложение</div>
+          <a className="portfolio__link" href="#">
+            ↗
+          </a>
+        </li>
       </ul>
     </section>
   );
