@@ -16,12 +16,13 @@
 
 .about-project__columns {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   padding-top: 70px;
   padding-bottom: 110px;
 }
 
 .about-project__column {
+  width: calc((100% - 40px) / 2);
   display: flex;
   flex-direction: column;
 }
@@ -38,6 +39,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  max-width: 550px;
 }
 
 .about-project__stages {
