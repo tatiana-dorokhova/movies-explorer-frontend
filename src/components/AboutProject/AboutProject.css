@@ -1,6 +1,7 @@
 .about-project {
   width: 100%;
   padding: 110px 70px;
+  box-sizing: border-box;
 }
 
 .about-project__title {
@@ -58,12 +59,14 @@
   width: calc(100% / 5);
   background-color: black;
   color: white;
+  border: none;
 }
 
 .about-project_light {
   width: calc(100% / 5 * 4);
   background-color: #f2f2f2;
   color: black;
+  border: none;
 }
 
 .about-project__caption {

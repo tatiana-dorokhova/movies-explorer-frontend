@@ -1,6 +1,6 @@
 // компонент, который отрисовывает шапку сайта на страницу
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
 
 // в зависимости от того, залогинен пользователь или нет, показываем:
@@ -22,47 +22,84 @@ import './Header.css';
 
 function Header(props) {
   const location = useLocation();
+  const isUserLoggedIn = props.isLoggedIn;
 
   return (
-    <header className="header section">
-      <img className="header__logo" src={props.src} alt={props.alt} />
-      <div className="header__buttons-block">
-        {location.pathname === '/' && (
-          <>
-            <Link to="/sign-up" className="header__link">
-              Регистрация
-            </Link>
-            <button
-              type="button"
-              className="header__button"
-              onClick={props.onSignIn}
-            >
-              Войти
-            </button>
-          </>
-        )}
-      </div>
+    <header className="header">
+      {location.pathname === '/' && (
+        <>
+          <div className="header__main-container">
+            <img className="header__logo" src={props.src} alt={props.alt} />
+            <div className="header__buttons-block">
+              <Link to="/sign-up" className="header__link header_main-page">
+                Регистрация
+              </Link>
+              <Link
+                to="/sign-in"
+                className="header__link header_main-page header_button header_signin"
+              >
+                Войти
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
 
-      {/* <div className="header__info-panel">
-        {location.pathname === '/sign-up' && (
-          <Link to="/sign-in" className="header__link">
-            Войти
-          </Link>
-        )}
-        {location.pathname === '/sign-in' && (
-          <Link to="/sign-up" className="header__link">
-            Регистрация
-          </Link>
-        )}
-        {location.pathname === '/' && (
+      {location.pathname === '/sign-up' && (
+        <>
+          <div className="header__auth-container">
+            <img className="header__logo" src={props.src} alt={props.alt} />
+            <div className="header__message">Добро пожаловать!</div>
+          </div>
+        </>
+      )}
+
+      {location.pathname === '/sign-in' && (
+        <>
+          <div className="header__auth-container">
+            <img className="header__logo" src={props.src} alt={props.alt} />
+            <div className="header__message">Рады видеть!</div>
+          </div>
+        </>
+      )}
+
+      {(location.pathname === '/movies' ||
+        location.pathname === '/saved-movies') &&
+        isUserLoggedIn && (
           <>
-            <p className="header__text">{props.email}</p>
-            <button type="button" className="header__link" onClick={props.onSignOut}>
-              Выйти
-            </button>
+            <div className="header__main-container">
+              <img className="header__logo" src={props.src} alt={props.alt} />
+              <div className="header__buttons-block">
+                <NavLink
+                  to="/movies"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'header__link header_films header_selected'
+                      : 'header__link header_films'
+                  }
+                >
+                  Фильмы
+                </NavLink>
+                <NavLink
+                  to="/saved-movies"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'header__link header_films header_selected'
+                      : 'header__link header_films'
+                  }
+                >
+                  Сохранённые фильмы
+                </NavLink>
+              </div>
+              <Link
+                to="/profile"
+                className="header__link header_button header_selected header_account"
+              >
+                Аккаунт
+              </Link>
+            </div>
           </>
         )}
-      </div> */}
     </header>
   );
 }

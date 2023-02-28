@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   padding: 79px 70px 20px;
+  box-sizing: border-box;
 }
 
 .footer__description {
