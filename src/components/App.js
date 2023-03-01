@@ -12,7 +12,12 @@ import Footer from './Footer/Footer';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isShortFilmSelected, setIsShortFilmSelected] = React.useState(false);
+
+  const handleToggleInSearchForm = () => {
+    setIsShortFilmSelected(!isShortFilmSelected);
+  };
 
   return (
     <>
@@ -23,7 +28,16 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route
               path="/movies"
-              element={isLoggedIn ? <Movies /> : <Navigate to="/sign-in" />}
+              element={
+                isLoggedIn ? (
+                  <Movies
+                    isOn={isShortFilmSelected}
+                    handleToggle={handleToggleInSearchForm}
+                  />
+                ) : (
+                  <Navigate to="/sign-in" />
+                )
+              }
             />
             <Route
               path="/saved-movies"
