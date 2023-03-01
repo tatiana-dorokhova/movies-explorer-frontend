@@ -20,7 +20,10 @@ function SearchForm(props) {
           </form>
         </div>
         <div className="search-form__switcher">
-          <FilterCheckbox isOn={props.isOn} handleToggle={props.handleToggle} />
+          <FilterCheckbox
+            isOn={props.isOn}
+            onSwitcherToggle={props.onSwitcherToggle}
+          />
           <p className="search-form__caption">Короткометражки</p>
         </div>
       </div>

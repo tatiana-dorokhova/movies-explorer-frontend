@@ -4,12 +4,12 @@ import './FilterCheckbox.css';
 
 import React from 'react';
 
-const FilterCheckbox = ({ isOn, handleToggle }) => {
+const FilterCheckbox = (props) => {
   return (
     <>
       <input
-        checked={isOn}
-        onChange={handleToggle}
+        checked={props.isOn}
+        onChange={props.onSwitcherToggle}
         className="filter-checkbox__checkbox"
         id={`switch-short-film`}
         type="checkbox"
@@ -17,7 +17,7 @@ const FilterCheckbox = ({ isOn, handleToggle }) => {
       <label className="filter-checkbox__label" htmlFor={`switch-short-film`}>
         {' '}
         <span
-          style={{ background: isOn && '#2be080' }}
+          style={{ background: props.isOn && '#2be080' }}
           className={`filter-checkbox__button`}
         />
       </label>

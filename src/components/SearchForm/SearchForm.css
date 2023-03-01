@@ -3,6 +3,7 @@
   box-sizing: border-box;
   padding: 70px 0;
   border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 10px;
 }
 
 .search-form__container {
