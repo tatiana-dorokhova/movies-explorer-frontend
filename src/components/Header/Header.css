@@ -29,13 +29,6 @@
   background-repeat: no-repeat;
 }
 
-.header__message {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  padding-top: 40px;
-}
-
 .header__buttons-block {
   display: flex;
   align-items: center;

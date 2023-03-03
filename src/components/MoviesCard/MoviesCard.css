@@ -39,15 +39,23 @@
   color: #a0a0a0;
 }
 
-.movies-card__save-button {
+.movies-card__button {
   width: 30px;
   height: 30px;
-  background-image: url('../../images/movies/movies-card-save-button.svg');
+  background-image: url('../../images/movies/movies-card-save-button-marked.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
   background-color: transparent;
+}
+
+.movies-card__button_marked {
+  background-image: url('../../images/movies/movies-card-save-button.svg');
+}
+
+.movies-card__button_remove {
+  background-image: url('../../images/movies/movies-card-remove-button.svg');
 }
 
 .movies-card__image {

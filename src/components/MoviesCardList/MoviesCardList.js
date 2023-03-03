@@ -9,8 +9,9 @@ function MoviesCardList(props) {
         return (
           <MoviesCard
             key={movie._id}
-            card={movie}
+            movie={movie}
             onMovieSave={props.onMovieSave}
+            onMovieRemove={props.onMovieRemove}
           />
         );
       })}

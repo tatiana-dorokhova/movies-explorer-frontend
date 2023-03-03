@@ -39,20 +39,11 @@ function Header(props) {
         </>
       )}
 
-      {location.pathname === '/sign-up' && (
+      {(location.pathname === '/sign-up' ||
+        location.pathname === '/sign-in') && (
         <>
           <div className="header__auth-container">
             <img className="header__logo" src={props.src} alt={props.alt} />
-            <div className="header__message">Добро пожаловать!</div>
-          </div>
-        </>
-      )}
-
-      {location.pathname === '/sign-in' && (
-        <>
-          <div className="header__auth-container">
-            <img className="header__logo" src={props.src} alt={props.alt} />
-            <div className="header__message">Рады видеть!</div>
           </div>
         </>
       )}
