@@ -9,6 +9,7 @@ import SavedMovies from './SavedMovies/SavedMovies';
 import Register from './Register/Register';
 import Login from './Login/Login';
 import Profile from './Profile/Profile';
+import PageNotFound from './PageNotFound/PageNotFound';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Footer from './Footer/Footer';
@@ -108,6 +109,7 @@ function App() {
                 )
               }
             />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Footer />
         </div>
