@@ -49,7 +49,8 @@ function Header(props) {
       )}
 
       {(location.pathname === '/movies' ||
-        location.pathname === '/saved-movies') &&
+        location.pathname === '/saved-movies' ||
+        location.pathname === '/profile') &&
         isUserLoggedIn && (
           <>
             <div className="header__main-container">

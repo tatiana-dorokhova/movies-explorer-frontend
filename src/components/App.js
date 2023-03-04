@@ -8,6 +8,7 @@ import Movies from './Movies/Movies';
 import SavedMovies from './SavedMovies/SavedMovies';
 import Register from './Register/Register';
 import Login from './Login/Login';
+import Profile from './Profile/Profile';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Footer from './Footer/Footer';
@@ -45,6 +46,10 @@ function App() {
     console.log('onRegister worked: email = ', email, ' password = ', password);
   }
 
+  function onChangeProfile({ name, email }) {
+    console.log('onRegister worked: name = ', name, ' email = ', email);
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -56,6 +61,22 @@ function App() {
               element={<Register onAuth={onRegister} isNameRequired="true" />}
             />
             <Route path="/sign-in" element={<Login onAuth={onLogin} />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  onAuth={onChangeProfile}
+                  title="Привет, currentUser.name!"
+                  formName="profile"
+                  inputName="Имя"
+                  inputEmail="E-mail"
+                  submitButtonName="Редактировать"
+                  route="/sign-in"
+                  profileSignoutButtonText="Выйти из аккаунта"
+                />
+              }
+            />
+
             <Route path="/" element={<Main />} />
             <Route
               path="/movies"
