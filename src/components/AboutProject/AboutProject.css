@@ -18,10 +18,16 @@
 .about-project__columns {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-
-  gap: 26px 40px;
+  column-gap: 40px;
   padding-top: 70px;
   padding-bottom: 110px;
+}
+
+.about-project__column {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  row-gap: 26px;
 }
 
 .about-project__column-title {
@@ -42,33 +48,32 @@
 }
 
 .about-project__stages {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 }
 
 .about-project__stage {
+  margin: 0;
+  padding: 9px 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  margin: 9px 0;
 }
 
 .about-project_dark {
-  width: calc(100% / 5);
   background-color: black;
   color: white;
   border: none;
 }
 
 .about-project_light {
-  width: calc(100% / 5 * 4);
   background-color: #f2f2f2;
   color: black;
   border: none;
 }
 
 .about-project__caption {
-  width: 100%;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -81,5 +86,57 @@
 @media screen and (max-width: 768px) {
   .about-project {
     padding: 90px 50px;
+  }
+
+  .about-project__columns {
+    gap: 22px 30px;
+    padding-bottom: 93px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__columns {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 60px 0;
+  }
+
+  .about-project__column {
+    row-gap: 16px;
+  }
+
+  .about-project__column-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__column-content {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__stages {
+    grid-template-columns: 1fr 1.8fr;
+  }
+
+  .about-project__stage {
+    padding: 11px 0;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__caption {
+    font-size: 11px;
+    line-height: 13px;
+    padding-top: 10px;
   }
 }
