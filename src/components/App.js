@@ -90,7 +90,7 @@ function App() {
                     onMovieSave={handleMovieSave}
                   />
                 ) : (
-                  <Navigate to="/sign-in" />
+                  <Navigate to="/sign-in" replace />
                 )
               }
             />
@@ -105,7 +105,7 @@ function App() {
                     onMovieRemove={handleMovieRemove}
                   />
                 ) : (
-                  <Navigate to="/sign-in" />
+                  <Navigate to="/sign-in" replace />
                 )
               }
             />

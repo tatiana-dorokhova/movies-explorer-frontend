@@ -21,7 +21,10 @@
   font-size: 16px;
   line-height: 19px;
 }
+
 .not-found__button {
+  margin-top: 184px;
+  padding: 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -29,11 +32,40 @@
   text-decoration: none;
   transition: opacity 0.3s ease-out;
   color: black;
-  margin-top: 184px;
   background: white;
 }
 
 .not-found__button:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .not-found__title {
+    margin-top: 408px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .not-found {
+    width: 300px;
+  }
+
+  .not-found__title {
+    font-size: 80px;
+    line-height: 97px;
+    margin-top: 329px;
+  }
+
+  .not-found__text {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .not-found__button {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 284px;
+  }
 }
