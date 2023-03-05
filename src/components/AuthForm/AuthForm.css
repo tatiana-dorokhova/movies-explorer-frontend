@@ -93,3 +93,34 @@
   color: #a0a0a0;
   margin-top: 16px;
 }
+
+@media screen and (max-width: 456px) {
+  .auth {
+    width: calc(100% - 2 * 30px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .auth {
+    width: 260px;
+  }
+
+  .auth__form {
+    height: 420px;
+  }
+
+  .auth__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .auth__links {
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .auth__title {
+    text-align: center;
+  }
+}
