@@ -90,6 +90,11 @@
   .header__auth-container {
     padding-top: 232px;
   }
+
+  .header__main-container {
+    padding: 0 30px;
+    width: calc(100% - 2 * 30px);
+  }
 }
 
 @media screen and (max-width: 456px) {

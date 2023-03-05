@@ -95,6 +95,12 @@
   }
 }
 
+@media screen and (max-width: 470px) {
+  .profile {
+    width: calc(100% - 2 * 30px);
+  }
+}
+
 @media screen and (max-width: 320px) {
   .profile {
     margin-top: 70px;
