@@ -5,11 +5,13 @@
 }
 
 .navtab__button {
+  width: 96px;
+  height: 36px;
   background: #e8e8e8;
   border-radius: 10px;
   border: none;
   margin-right: 10px;
-  padding: 10px 17px;
+  padding: 0;
   color: white;
   font-weight: 500;
   font-size: 12px;
@@ -18,4 +20,18 @@
 
 .navtab__button:last-of-type {
   margin-right: 0;
+}
+
+@media screen and (max-width: 460px) {
+  .navtab {
+    padding-bottom: 17px;
+  }
+
+  .navtab__button {
+    width: 82px;
+    height: 26px;
+    font-size: 10px;
+    border-radius: 6px;
+    margin-right: 6px;
+  }
 }

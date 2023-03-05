@@ -93,7 +93,6 @@
 
   .header__main-container {
     padding: 0 30px;
-    width: calc(100% - 2 * 30px);
   }
 }
 
@@ -104,6 +103,10 @@
 }
 
 @media screen and (max-width: 320px) {
+  .header__main-container {
+    padding: 0 14px;
+  }
+
   .header__auth-container {
     align-items: center;
   }
