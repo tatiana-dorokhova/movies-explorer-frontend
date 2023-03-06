@@ -61,13 +61,13 @@
   text-align: center;
 }
 
-.about-project_dark {
+.about-project__stage_dark {
   background-color: black;
   color: white;
   border: none;
 }
 
-.about-project_light {
+.about-project__stage_light {
   background-color: #f2f2f2;
   color: black;
   border: none;

@@ -25,12 +25,15 @@ function Header(props) {
           <div className="header__main-container">
             <img className="header__logo" src={props.src} alt={props.alt} />
             <div className="header__buttons-block">
-              <Link to="/sign-up" className="header__link header_main-page">
+              <Link
+                to="/sign-up"
+                className="header__link header__link_main-page"
+              >
                 Регистрация
               </Link>
               <Link
                 to="/sign-in"
-                className="header__link header_main-page header_button header_signin"
+                className="header__link header__link_main-page header__link_button header__link_signin"
               >
                 Войти
               </Link>
@@ -60,8 +63,8 @@ function Header(props) {
                   to="/movies"
                   className={({ isActive }) =>
                     isActive
-                      ? 'header__link header_films header_selected'
-                      : 'header__link header_films'
+                      ? 'header__link header__link_films header__link_selected'
+                      : 'header__link header__link_films'
                   }
                 >
                   Фильмы
@@ -70,8 +73,8 @@ function Header(props) {
                   to="/saved-movies"
                   className={({ isActive }) =>
                     isActive
-                      ? 'header__link header_films header_selected'
-                      : 'header__link header_films'
+                      ? 'header__link header__link_films header__link_selected'
+                      : 'header__link header__link_films'
                   }
                 >
                   Сохранённые фильмы
@@ -79,7 +82,7 @@ function Header(props) {
               </div>
               <Link
                 to="/profile"
-                className="header__link header_button header_selected header_account"
+                className="header__link header__link_button header__link_selected header__link_account"
               >
                 Аккаунт
               </Link>

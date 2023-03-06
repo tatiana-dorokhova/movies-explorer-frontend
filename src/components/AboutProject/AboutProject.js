@@ -26,8 +26,12 @@ function AboutProject(props) {
         </div>
       </div>
       <div className="about-project__stages">
-        <div className="about-project__stage about-project_dark">1 неделя</div>
-        <div className="about-project__stage about-project_light">4 недели</div>
+        <div className="about-project__stage about-project__stage_dark">
+          1 неделя
+        </div>
+        <div className="about-project__stage about-project__stage_light">
+          4 недели
+        </div>
         <div className="about-project__caption">Back-end</div>
         <div className="about-project__caption">Front-end</div>
       </div>

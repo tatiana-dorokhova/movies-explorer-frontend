@@ -41,7 +41,7 @@
 }
 
 /* ссылки со страницы / */
-.header_main-page {
+.header__link_main-page {
   padding: 0;
   font-weight: 400;
   font-size: 12px;
@@ -49,29 +49,30 @@
 }
 
 /* ссылки со страницы movies */
-.header_films {
+.header__link_films {
   font-size: 13px;
   line-height: 18px;
   margin-right: 16px;
 }
 
-.header_films:last-of-type {
+.header__link_films:last-of-type {
   margin-right: 0;
 }
 
 /* выделенные ссылки */
-.header_selected {
+.header__link_selected {
   font-weight: 500;
 }
 
 /* общие свойства для ссылок, оформленных кнопками */
-.header_button {
+.header__link_button {
   border: none;
   padding: 8px 20px;
+  line-height: 16px;
 }
 
 /* кнопка Войти */
-.header_signin {
+.header__link_signin {
   background: black;
   color: white;
   font-size: 12px;
@@ -79,11 +80,10 @@
 }
 
 /* кнопка Аккаунт */
-.header_account {
+.header__link_account {
   background: #f9f9f9;
   border-radius: 20px;
   font-size: 14px;
-  line-height: 16px;
 }
 
 @media screen and (max-width: 768px) {
@@ -99,6 +99,19 @@
 @media screen and (max-width: 456px) {
   .header__auth-container {
     width: calc(100% - 2 * 30px);
+  }
+
+  .header_main-page {
+    font-size: 10px;
+  }
+
+  .header_button {
+    padding: 5px 12px;
+  }
+
+  .header__link_signin {
+    font-size: 10px;
+    margin-left: 14px;
   }
 }
 
