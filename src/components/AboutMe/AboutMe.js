@@ -4,7 +4,7 @@ import './AboutMe.css';
 
 function AboutMe(props) {
   return (
-    <section className="about-me">
+    <section className="about-me" id="aboutMeSection">
       <h2 className="about-me__title">Студент</h2>
       <div className="about-me__columns">
         <div className="about-me__info">

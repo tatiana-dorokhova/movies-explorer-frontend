@@ -5,6 +5,10 @@
 }
 
 .navtab__button {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
   width: 96px;
   height: 36px;
   background: #e8e8e8;

@@ -3,7 +3,7 @@ import './AboutProject.css';
 
 function AboutProject(props) {
   return (
-    <section className="about-project">
+    <section className="about-project" id="aboutProjectSection">
       <h2 className="about-project__title">О проекте</h2>
       <div className="about-project__columns">
         <div className="about-project__column">

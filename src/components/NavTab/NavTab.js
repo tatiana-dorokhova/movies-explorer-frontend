@@ -4,9 +4,15 @@ import './NavTab.css';
 function NavTab(props) {
   return (
     <div className="navtab">
-      <button className="navtab__button">О проекте</button>
-      <button className="navtab__button">Технологии</button>
-      <button className="navtab__button">Студент</button>
+      <a className="navtab__button" href="#aboutProjectSection">
+        О проекте
+      </a>
+      <a className="navtab__button" href="#techsSection">
+        Технологии
+      </a>
+      <a className="navtab__button" href="#aboutMeSection">
+        Студент
+      </a>
     </div>
   );
 }
