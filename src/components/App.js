@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import logoImage from '../images/header/header-logo.svg';
+import headerLogoImage from '../images/header/header-logo.svg';
+import burgerCloseButtonImage from '../images/header/header-burger-close-button.svg';
+
 import Header from './Header/Header';
 import Main from './Main/Main';
 import Movies from './Movies/Movies';
@@ -55,7 +57,13 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="content">
-          <Header src={logoImage} alt="О проекте" isLoggedIn={isLoggedIn} />
+          <Header
+            logoSrc={headerLogoImage}
+            logoAlt="О проекте"
+            closeButtonSrc={burgerCloseButtonImage}
+            closeButtonAlt="Закрыть меню"
+            isLoggedIn={isLoggedIn}
+          />
           <Routes>
             <Route
               path="/sign-up"

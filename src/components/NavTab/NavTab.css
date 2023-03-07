@@ -20,6 +20,10 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  transition: color 0.3s ease-out;
+}
+.navtab__button:hover {
+  color: black;
 }
 
 .navtab__button:last-of-type {

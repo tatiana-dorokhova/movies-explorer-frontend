@@ -8,19 +8,28 @@ function Portfolio(props) {
       <ul className="portfolio__list">
         <li className="portfolio__item">
           <div>Статичный сайт</div>
-          <a className="portfolio__link" href="#">
+          <a
+            className="portfolio__link"
+            href="https://tatiana-dorokhova.github.io/how-to-learn/"
+          >
             ↗
           </a>
         </li>
         <li className="portfolio__item">
           <div>Адаптивный сайт</div>
-          <a className="portfolio__link" href="#">
+          <a
+            className="portfolio__link"
+            href="https://tatiana-dorokhova.github.io/russian-travel/"
+          >
             ↗
           </a>
         </li>
         <li className="portfolio__item">
           <div>Одностраничное приложение</div>
-          <a className="portfolio__link" href="#">
+          <a
+            className="portfolio__link"
+            href="https://mesto.dorokhova.nomoredomains.work"
+          >
             ↗
           </a>
         </li>

@@ -94,6 +94,10 @@
   .header__main-container {
     padding: 0 30px;
   }
+
+  .header__link_account {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 456px) {

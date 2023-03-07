@@ -38,6 +38,12 @@
 .portfolio__link {
   text-decoration: none;
   color: black;
+  transition: opacity 0.3s ease-out;
+}
+
+.portfolio__link:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

@@ -7,7 +7,6 @@
 .movies-card__header {
   margin: 0;
   width: 100%;
-  width: 364px;
   min-height: 68px;
   display: flex;
   justify-content: space-between;
@@ -18,7 +17,7 @@
 }
 
 .movies-card__info {
-  max-width: 280px;
+  width: calc(100% - 44px);
   display: flex;
   flex-direction: column;
   align-content: space-between;
@@ -68,4 +67,16 @@
 .movies-card__image:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+
+@media screen and (max-width: 892px) {
+  .movies-card {
+    width: 339px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .movies-card {
+    width: 300px;
+  }
 }
