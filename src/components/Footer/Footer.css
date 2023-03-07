@@ -1,10 +1,14 @@
 .footer {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(max-content, 1fr));
+  grid-template-areas:
+    'head head '
+    'copyright links';
   align-items: center;
-  padding: 79px 70px 20px;
+  padding: 79px 70px 0;
   box-sizing: border-box;
+  justify-items: end;
 }
 
 .footer__description {
@@ -15,28 +19,24 @@
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 20px;
   color: #a0a0a0;
-}
-
-.footer__columns {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 0 0;
-}
-
-.footer__copyright {
-  padding: 0;
-  margin: 0;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
+  grid-area: head;
 }
 
 .footer__links {
-  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-template-areas: 'practicum github';
+  grid-area: links;
+}
+
+.footer__copyright {
+  padding: 20px 0;
   margin: 0;
-  display: flex;
-  justify-content: space-between;
+  justify-self: start;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  grid-area: copyright;
 }
 
 .footer__link {
@@ -51,6 +51,62 @@
   margin-right: 20px;
 }
 
+.footer__link_practicum {
+  grid-area: practicum;
+}
+
+.footer__link_github {
+  grid-area: github;
+}
+
 .footer__link:last-of-type {
   margin-right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 79px 30px 0;
+  }
+}
+
+@media screen and (max-width: 437px) {
+  .footer {
+    padding: 79px 10px 20px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'head'
+      'links'
+      'copyright';
+    justify-items: center;
+  }
+
+  .footer__description {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__links {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'practicum' 'github';
+    padding: 30px 0;
+    justify-items: center;
+  }
+
+  .footer__copyright {
+    padding: 0;
+    justify-self: center;
+    font-size: 12px;
+    line-height: 15px;
+    color: #a0a0a0;
+  }
+
+  .footer__link {
+    margin: 0;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__link_practicum {
+    padding-bottom: 12px;
+  }
 }
