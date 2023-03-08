@@ -63,6 +63,7 @@
   border: none;
   margin: 0;
   padding: 0;
+  height: 40px;
 }
 
 .search-form__button {
@@ -78,7 +79,7 @@
   background-color: transparent;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 892px) {
   .search-form {
     width: calc(100% - 2 * 30px);
     padding: 80px 0 109px;

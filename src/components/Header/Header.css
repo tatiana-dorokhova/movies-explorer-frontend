@@ -7,11 +7,15 @@
 
 .header__main-container {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(min-content, 1fr));
+  grid-template-areas: 'logo links buttons';
+  justify-items: center;
   justify-content: space-between;
   padding: 0 70px;
   height: 74px;
   align-items: center;
+  position: relative;
 }
 
 .header__auth-container {
@@ -27,11 +31,27 @@
   height: 38px;
   background-size: contain;
   background-repeat: no-repeat;
+  grid-area: logo;
+  justify-self: left;
+}
+
+.header__links-block {
+  display: flex;
+  align-items: center;
+  grid-area: links;
 }
 
 .header__buttons-block {
   display: flex;
   align-items: center;
+  justify-self: end;
+  grid-area: buttons;
+}
+
+.header__account-block {
+  display: flex;
+  justify-self: end;
+  grid-area: buttons;
 }
 
 /* общие свойства ссылок */
@@ -86,6 +106,77 @@
   font-size: 14px;
 }
 
+.header__mobile-navigation {
+  width: 100%;
+  max-width: 520px;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+
+/* скрываем чекбокс бургер-меню */
+.header__burger-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* сама кнопка бургера */
+.header__burger-button {
+  display: none;
+}
+/* линии кнопки бургера */
+.header__burger-line,
+.header__burger-line::before,
+.header__burger-line::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+}
+
+.header__burger-line::before {
+  content: '';
+  top: -7px;
+}
+
+.header__burger-line::after {
+  content: '';
+  top: 7px;
+}
+
+/* контейнер меню */
+.header__mobile-menu {
+  display: none;
+}
+
+.header__mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 105px 0 0;
+}
+
+/* логика отметки чекбокса бургера */
+#checkbox-mobile-menu:checked ~ .header__burger-button > span {
+  transform: rotate(45deg);
+}
+#checkbox-mobile-menu:checked ~ .header__burger-button > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+#checkbox-mobile-menu:checked ~ .header__burger-button > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#checkbox-mobile-menu:checked ~ .header__mobile-menu {
+  visibility: visible;
+  left: 0;
+}
+
 @media screen and (max-width: 768px) {
   .header__auth-container {
     padding-top: 232px;
@@ -95,8 +186,42 @@
     padding: 0 30px;
   }
 
-  .header__link_account {
+  .header__links-block {
     display: none;
+  }
+
+  .header__account-block {
+    display: none;
+  }
+
+  .header__link_account {
+  }
+
+  .header__burger-button {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    position: fixed;
+    top: 25px;
+    right: 30px;
+    width: 28px;
+    height: 23px;
+    margin-right: 8px;
+    cursor: pointer;
+    z-index: 4;
+  }
+
+  .header__mobile-menu {
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    background-color: bisque;
+    z-index: 3;
   }
 }
 
