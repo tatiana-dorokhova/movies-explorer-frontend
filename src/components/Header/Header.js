@@ -70,71 +70,69 @@ function Header(props) {
                 src={props.logoSrc}
                 alt={props.logoAlt}
               />
-              <div className="header__mobile-navigation">
-                {/* поначалу скрытая кнопка бургер-меню */}
-                <input
-                  className="header__burger-checkbox"
-                  type="checkbox"
-                  id="checkbox-mobile-menu"
-                />
-                <label
-                  className="header__burger-button"
-                  htmlFor="checkbox-mobile-menu"
-                >
-                  <span className="header__burger-line"></span>
-                </label>
+              {/* поначалу скрытая кнопка бургер-меню */}
+              <input
+                className="header__burger-checkbox"
+                type="checkbox"
+                id="checkbox-mobile-menu"
+              />
+              <label
+                className="header__burger-button"
+                htmlFor="checkbox-mobile-menu"
+              >
+                <span className="header__burger-line"></span>
+              </label>
 
-                {/* навигация по странице мобильного меню */}
-                <nav className="header__mobile-menu">
-                  <ul className="header__mobile-menu-list">
-                    <li className="header__mobile-menu-item">
-                      <NavLink
-                        to="/"
-                        className={({ isActive }) =>
-                          isActive
-                            ? 'header__link header__link_mobile header__link_mobile-selected'
-                            : 'header__link header__link_mobile'
-                        }
-                      >
-                        Главная
-                      </NavLink>
-                    </li>
-                    <li className="header__mobile-menu-item">
-                      <NavLink
-                        to="/movies"
-                        className={({ isActive }) =>
-                          isActive
-                            ? 'header__link header__link_mobile header__link_mobile-selected'
-                            : 'header__link header__link_mobile'
-                        }
-                      >
-                        Фильмы
-                      </NavLink>
-                    </li>
+              {/* навигация по странице мобильного меню */}
+              <nav className="header__mobile-menu">
+                <ul className="header__mobile-menu-list">
+                  <li className="header__mobile-menu-item">
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        isActive
+                          ? 'header__link header__link_mobile header__link_mobile-active'
+                          : 'header__link header__link_mobile'
+                      }
+                    >
+                      Главная
+                    </NavLink>
+                  </li>
+                  <li className="header__mobile-menu-item">
+                    <NavLink
+                      to="/movies"
+                      className={({ isActive }) =>
+                        isActive
+                          ? 'header__link header__link_mobile header__link_mobile-active'
+                          : 'header__link header__link_mobile'
+                      }
+                    >
+                      Фильмы
+                    </NavLink>
+                  </li>
 
-                    <li className="header__mobile-menu-item">
-                      <NavLink
-                        to="/saved-movies"
-                        className={({ isActive }) =>
-                          isActive
-                            ? 'header__link header__link_mobile header__link_mobile-selected'
-                            : 'header__link header__link_mobile'
-                        }
-                      >
-                        Сохранённые&nbsp;фильмы
-                      </NavLink>
-                    </li>
-                    <li className="header__mobile-menu-item header__mobile-menu-item_account">
-                      <Link
-                        to="/profile"
-                        className="header__link header__link_button header__link_selected header__link_account"
-                      >
-                        Аккаунт
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+                  <li className="header__mobile-menu-item">
+                    <NavLink
+                      to="/saved-movies"
+                      className={({ isActive }) =>
+                        isActive
+                          ? 'header__link header__link_mobile header__link_mobile-active'
+                          : 'header__link header__link_mobile'
+                      }
+                    >
+                      Сохранённые&nbsp;фильмы
+                    </NavLink>
+                  </li>
+                  <li className="header__mobile-menu-item header__mobile-menu-item_account">
+                    <Link
+                      to="/profile"
+                      className="header__link header__link_button header__link_active header__link_account"
+                    >
+                      Аккаунт
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
 
               {/* изначально видимый блок навигации в шапке на больших разрешениях экрана */}
               <div className="header__links-block">
@@ -142,7 +140,7 @@ function Header(props) {
                   to="/movies"
                   className={({ isActive }) =>
                     isActive
-                      ? 'header__link header__link_films header__link_selected'
+                      ? 'header__link header__link_films header__link_active'
                       : 'header__link header__link_films'
                   }
                 >
@@ -152,7 +150,7 @@ function Header(props) {
                   to="/saved-movies"
                   className={({ isActive }) =>
                     isActive
-                      ? 'header__link header__link_films header__link_selected'
+                      ? 'header__link header__link_films header__link_active'
                       : 'header__link header__link_films'
                   }
                 >
@@ -162,7 +160,7 @@ function Header(props) {
               <div className="header__account-block">
                 <Link
                   to="/profile"
-                  className="header__link header__link_button header__link_selected header__link_account"
+                  className="header__link header__link_button header__link_active header__link_account"
                 >
                   Аккаунт
                 </Link>
