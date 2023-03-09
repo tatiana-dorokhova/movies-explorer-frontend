@@ -117,18 +117,6 @@
   padding-bottom: 4px;
 }
 
-.header__mobile-navigation {
-  width: 100%;
-  max-width: 520px;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 2;
-}
-
 /* скрываем чекбокс бургер-меню */
 .header__burger-checkbox {
   opacity: 0;
@@ -158,6 +146,10 @@
 .header__burger-line::after {
   content: '';
   top: 7px;
+}
+
+.header__mobile-navigation {
+  display: none;
 }
 
 /* контейнер меню */
@@ -198,7 +190,6 @@
 }
 #checkbox-mobile-menu:checked ~ .header__mobile-menu {
   visibility: visible;
-  left: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -218,6 +209,18 @@
     display: none;
   }
 
+  .header__mobile-navigation {
+    width: 100%;
+    max-width: 520px;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+  }
+
   .header__burger-button {
     display: flex;
     align-items: center;
@@ -233,9 +236,9 @@
   }
 
   .header__mobile-menu {
+    visibility: hidden;
     display: flex;
     justify-content: center;
-    visibility: hidden;
     width: 100%;
     height: 100%;
     margin: 0;
