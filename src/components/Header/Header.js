@@ -83,6 +83,11 @@ function Header(props) {
                 <span className="header__burger-line"></span>
               </label>
 
+              <label
+                class="header__mobile-menu-overlay"
+                for="checkbox-mobile-menu"
+              ></label>
+
               {/* навигация по странице мобильного меню */}
               <nav className="header__mobile-menu">
                 <ul className="header__mobile-menu-list">
