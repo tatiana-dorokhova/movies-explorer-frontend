@@ -84,8 +84,8 @@ function Header(props) {
               </label>
 
               <label
-                class="header__mobile-menu-overlay"
-                for="checkbox-mobile-menu"
+                className="header__mobile-menu-overlay"
+                htmlFor="checkbox-mobile-menu"
               ></label>
 
               {/* навигация по странице мобильного меню */}
