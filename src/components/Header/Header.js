@@ -79,7 +79,7 @@ function Header(props) {
                 />
                 <label
                   className="header__burger-button"
-                  for="checkbox-mobile-menu"
+                  htmlFor="checkbox-mobile-menu"
                 >
                   <span className="header__burger-line"></span>
                 </label>

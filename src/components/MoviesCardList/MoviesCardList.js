@@ -8,17 +8,15 @@ function MoviesCardList(props) {
     <section className="movies-list" aria-label="movies-cards">
       {props.movies.map((movie) => {
         return (
-          <>
-            <MoviesCard
-              key={movie._id}
-              movie={movie}
-              onMovieSave={props.onMovieSave}
-              onMovieRemove={props.onMovieRemove}
-            />
-            <LoadButton loadButtonName="Ещё" />
-          </>
+          <MoviesCard
+            key={movie._id}
+            movie={movie}
+            onMovieSave={props.onMovieSave}
+            onMovieRemove={props.onMovieRemove}
+          />
         );
       })}
+      <LoadButton loadButtonName="Ещё" />
     </section>
   );
 }
