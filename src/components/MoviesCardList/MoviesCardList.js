@@ -5,19 +5,21 @@ import LoadButton from '../LoadButton/LoadButton';
 
 function MoviesCardList(props) {
   return (
-    <section className="movies-list" aria-label="movies-cards">
-      {props.movies.map((movie) => {
-        return (
-          <MoviesCard
-            key={movie._id}
-            movie={movie}
-            onMovieSave={props.onMovieSave}
-            onMovieRemove={props.onMovieRemove}
-          />
-        );
-      })}
+    <>
+      <section className="movies-list" aria-label="movies-cards">
+        {props.movies.map((movie) => {
+          return (
+            <MoviesCard
+              key={movie._id}
+              movie={movie}
+              onMovieSave={props.onMovieSave}
+              onMovieRemove={props.onMovieRemove}
+            />
+          );
+        })}
+      </section>
       <LoadButton loadButtonName="Ещё" />
-    </section>
+    </>
   );
 }
 
