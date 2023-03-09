@@ -87,44 +87,44 @@ function Header(props) {
                 {/* навигация по странице мобильного меню */}
                 <nav className="header__mobile-menu">
                   <ul className="header__mobile-menu-list">
-                    <li>
+                    <li className="header__mobile-menu-item">
                       <NavLink
                         to="/"
                         className={({ isActive }) =>
                           isActive
-                            ? 'header__link header__link_films header__link_selected'
-                            : 'header__link header__link_films'
+                            ? 'header__link header__link_mobile header__link_mobile-selected'
+                            : 'header__link header__link_mobile'
                         }
                       >
                         Главная
                       </NavLink>
                     </li>
-                    <li>
+                    <li className="header__mobile-menu-item">
                       <NavLink
                         to="/movies"
                         className={({ isActive }) =>
                           isActive
-                            ? 'header__link header__link_films header__link_selected'
-                            : 'header__link header__link_films'
+                            ? 'header__link header__link_mobile header__link_mobile-selected'
+                            : 'header__link header__link_mobile'
                         }
                       >
                         Фильмы
                       </NavLink>
                     </li>
 
-                    <li>
+                    <li className="header__mobile-menu-item">
                       <NavLink
                         to="/saved-movies"
                         className={({ isActive }) =>
                           isActive
-                            ? 'header__link header__link_films header__link_selected'
-                            : 'header__link header__link_films'
+                            ? 'header__link header__link_mobile header__link_mobile-selected'
+                            : 'header__link header__link_mobile'
                         }
                       >
                         Сохранённые&nbsp;фильмы
                       </NavLink>
                     </li>
-                    <li>
+                    <li className="header__mobile-menu-item header__mobile-menu-item_account">
                       <Link
                         to="/profile"
                         className="header__link header__link_button header__link_selected header__link_account"
