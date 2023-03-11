@@ -20,6 +20,9 @@
   padding-bottom: 20px;
   color: #a0a0a0;
   grid-area: head;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .footer__links {

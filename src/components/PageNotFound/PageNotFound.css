@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 60px;
 }
 
 .not-found__title {
@@ -41,6 +42,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .not-found {
+    margin-bottom: 222px;
+  }
+
   .not-found__title {
     margin-top: 408px;
   }
@@ -49,6 +54,7 @@
 @media screen and (max-width: 320px) {
   .not-found {
     width: 300px;
+    margin-bottom: 30px;
   }
 
   .not-found__title {
@@ -64,8 +70,8 @@
   }
 
   .not-found__button {
+    margin-top: 284px;
     font-size: 12px;
     line-height: 15px;
-    margin-top: 284px;
   }
 }

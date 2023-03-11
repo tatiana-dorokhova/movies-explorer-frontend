@@ -62,10 +62,11 @@ function Profile(props) {
             {props.submitButtonName}
           </button>
         </form>
+
+        <Link to={props.route} className="profile__link">
+          {props.profileSignoutButtonText}
+        </Link>
       </div>
-      <Link to={props.route} className="profile__link">
-        {props.profileSignoutButtonText}
-      </Link>
     </>
   );
 }

@@ -84,4 +84,9 @@
   .portfolio {
     padding: 0 14px;
   }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }

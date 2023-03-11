@@ -22,7 +22,6 @@
   grid-template-columns: repeat(3, minmax(min-content, 1fr));
   grid-template-areas: 'logo links buttons';
   justify-items: center;
-  justify-content: space-between;
   padding: 0 70px;
   height: 74px;
   align-items: center;
@@ -74,7 +73,7 @@
 /* ссылки со страницы / */
 .header__link_main-page {
   padding: 0;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 12px;
   line-height: 16px;
 }
@@ -105,6 +104,7 @@
 /* кнопка Войти */
 .header__link_signin {
   background: black;
+  border-radius: 3px;
   color: white;
   font-size: 12px;
   margin-left: 30px;
@@ -262,6 +262,7 @@
 @media screen and (max-width: 456px) {
   .header__auth-container {
     width: calc(100% - 2 * 30px);
+    padding: 56px 0 50px;
   }
 
   .header_main-page {
@@ -272,9 +273,17 @@
     padding: 5px 12px;
   }
 
+  .header__link_main-page {
+    font-size: 10px;
+  }
+
   .header__link_signin {
     font-size: 10px;
     margin-left: 14px;
+  }
+
+  .header__link_button {
+    padding: 5px 12px;
   }
 
   .header__burger-button {
@@ -320,5 +329,17 @@
 
   .header__auth-container {
     align-items: center;
+  }
+
+  .header__burger-button {
+    margin-right: 0;
+  }
+
+  .header__mobile-menu-item {
+    padding-bottom: 24px;
+  }
+
+  .header__link_mobile-active {
+    padding-bottom: 7px;
   }
 }

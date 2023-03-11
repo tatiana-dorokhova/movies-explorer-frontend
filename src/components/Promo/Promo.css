@@ -22,10 +22,10 @@
 @media screen and (max-width: 768px) {
   .promo {
     width: calc(100% - 2 * 20px);
-    max-width: 680px;
   }
 
   .promo__text {
+    max-width: 680px;
     padding-top: 350px;
     padding-bottom: 314px;
     font-size: 40px;
@@ -34,6 +34,10 @@
 }
 
 @media screen and (max-width: 460px) {
+  .promo {
+    margin-top: 14px;
+  }
+
   .promo__text {
     font-size: 29px;
     line-height: 37px;

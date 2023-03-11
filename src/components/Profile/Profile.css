@@ -1,5 +1,5 @@
 .profile {
-  margin: 74px 0 0;
+  margin: 74px 0 70px;
   padding: 0;
   width: 410px;
   display: flex;
@@ -31,7 +31,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #e8e8e8;
-  height: 44px;
+  height: 45px;
 }
 
 .profile__label:last-of-type {
@@ -86,7 +86,7 @@
 
 @media screen and (max-width: 768px) {
   .profile {
-    margin-top: 236px;
+    margin: 236px 0 269px;
   }
 
   .profile__form {
@@ -98,17 +98,17 @@
 @media screen and (max-width: 470px) {
   .profile {
     width: calc(100% - 2 * 30px);
+    margin: 70px 0 40px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .profile {
-    margin-top: 70px;
     width: 260px;
   }
 
   .profile__form {
-    margin-top: 64px;
+    margin-top: 37px;
     height: 472px;
   }
 
