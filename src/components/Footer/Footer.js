@@ -11,7 +11,7 @@ function Footer(props) {
     location.pathname === '/saved-movies'
   ) {
     return (
-      <div className="footer">
+      <footer className="footer">
         <p className="footer__description">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </p>
@@ -34,7 +34,7 @@ function Footer(props) {
             Github
           </a>
         </nav>
-      </div>
+      </footer>
     );
   }
 

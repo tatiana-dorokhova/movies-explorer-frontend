@@ -17,9 +17,15 @@
   border: none;
   background: #f9f9f9;
   border-radius: 6px;
+  transition: color 0.3s ease-out;
 }
 
-.load-button {
+.load-button:hover {
+  cursor: pointer;
+  color: #ff4062;
+}
+
+.load-button_hidden {
   margin: 50px auto 54px;
   visibility: hidden;
 }
