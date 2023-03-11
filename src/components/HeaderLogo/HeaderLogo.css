@@ -5,4 +5,10 @@
   background-repeat: no-repeat;
   grid-area: logo;
   justify-self: left;
+  transition: opacity 0.3s ease-out;
+}
+
+.header__logo:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
