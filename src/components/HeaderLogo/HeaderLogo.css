@@ -1,0 +1,8 @@
+.header__logo {
+  width: 38px;
+  height: 38px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  grid-area: logo;
+  justify-self: left;
+}

@@ -2,6 +2,7 @@
 
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
+import HeaderLogo from '../HeaderLogo/HeaderLogo';
 
 // в зависимости от того, залогинен пользователь или нет, показываем (на 1280px):
 
@@ -23,11 +24,7 @@ function Header(props) {
       {location.pathname === '/' && (
         <>
           <div className="header__main-container">
-            <img
-              className="header__logo"
-              src={props.logoSrc}
-              alt={props.logoAlt}
-            />
+            <HeaderLogo logoSrc={props.logoSrc} logoAlt={props.logoAlt} />
             <div className="header__buttons-block">
               <Link
                 to="/sign-up"
@@ -50,11 +47,7 @@ function Header(props) {
         location.pathname === '/sign-in') && (
         <>
           <div className="header__auth-container">
-            <img
-              className="header__logo"
-              src={props.logoSrc}
-              alt={props.logoAlt}
-            />
+            <HeaderLogo logoSrc={props.logoSrc} logoAlt={props.logoAlt} />
           </div>
         </>
       )}
@@ -65,11 +58,8 @@ function Header(props) {
         isUserLoggedIn && (
           <>
             <div className="header__main-container">
-              <img
-                className="header__logo"
-                src={props.logoSrc}
-                alt={props.logoAlt}
-              />
+              <HeaderLogo logoSrc={props.logoSrc} logoAlt={props.logoAlt} />
+
               {/* поначалу скрытая кнопка бургер-меню */}
               <input
                 className="header__burger-checkbox"
