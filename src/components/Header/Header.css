@@ -1,0 +1,348 @@
+.header {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.header__mobile-menu-overlay {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.header__main-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(min-content, 1fr));
+  grid-template-areas: 'logo links buttons';
+  justify-items: center;
+  padding: 0 70px;
+  height: 74px;
+  align-items: center;
+  position: relative;
+}
+
+.header__auth-container {
+  width: 396px;
+  margin: 0 auto;
+  padding: 70px 0 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__links-block {
+  display: flex;
+  align-items: center;
+  grid-area: links;
+}
+
+.header__buttons-block {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  grid-area: buttons;
+}
+
+.header__account-block {
+  display: flex;
+  justify-self: end;
+  grid-area: buttons;
+}
+
+/* общие свойства ссылок */
+.header__link {
+  text-decoration: none;
+  color: black;
+}
+
+/* ссылки со страницы / */
+.header__link_main-page {
+  padding: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* ссылки со страницы movies */
+.header__link_films {
+  font-size: 13px;
+  line-height: 18px;
+  margin-right: 16px;
+  transition: opacity 0.3s ease-out;
+}
+
+.header__link_films:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.header__link_films:last-of-type {
+  margin-right: 0;
+}
+
+/* выделенные ссылки */
+.header__link_active {
+  font-weight: 500;
+}
+
+/* общие свойства для ссылок, оформленных кнопками */
+.header__link_button {
+  border: none;
+  padding: 8px 20px;
+  line-height: 16px;
+}
+
+/* кнопка Войти */
+.header__link_signin {
+  background: black;
+  border-radius: 3px;
+  color: white;
+  font-size: 12px;
+  margin-left: 30px;
+}
+
+/* кнопка Аккаунт */
+.header__link_account {
+  background: #f9f9f9;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: color 0.3s ease-out;
+}
+
+.header__link_account:hover {
+  color: #2be080;
+  cursor: pointer;
+}
+
+.header__link_mobile {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+}
+
+.header__link_mobile-active {
+  border-bottom: 2px solid black;
+  padding-bottom: 4px;
+}
+
+/* скрываем чекбокс бургер-меню */
+.header__burger-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  grid-area: buttons;
+}
+
+/* сама кнопка бургера */
+.header__burger-button {
+  display: none;
+}
+
+/* линии кнопки бургера */
+.header__burger-line,
+.header__burger-line::before,
+.header__burger-line::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+}
+
+.header__burger-line::before {
+  content: '';
+  top: -7px;
+}
+
+.header__burger-line::after {
+  content: '';
+  top: 7px;
+}
+
+/* контейнер меню */
+.header__mobile-menu {
+  display: none;
+}
+
+.header__mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 159px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.header__mobile-menu-item {
+  padding-bottom: 28px;
+}
+
+.header__mobile-menu-item_account {
+  position: fixed;
+  bottom: 90px;
+}
+
+/* логика отметки чекбокса бургера */
+#checkbox-mobile-menu:checked ~ .header__burger-button > span {
+  transform: rotate(45deg);
+}
+#checkbox-mobile-menu:checked ~ .header__burger-button > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+#checkbox-mobile-menu:checked ~ .header__burger-button > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+/* #checkbox-mobile-menu:checked ~ .header__mobile-menu,
+.header__mobile-menu-overlay {
+  display: flex;
+} */
+
+@media screen and (max-width: 768px) {
+  #checkbox-mobile-menu:checked ~ .header__mobile-menu {
+    display: flex;
+  }
+
+  #checkbox-mobile-menu:checked ~ .header__mobile-menu-overlay {
+    display: flex;
+  }
+
+  .header__auth-container {
+    padding-top: 232px;
+  }
+
+  .header__main-container {
+    padding: 0 30px;
+  }
+
+  .header__links-block {
+    display: none;
+  }
+
+  .header__account-block {
+    display: none;
+  }
+
+  .header__burger-button {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    position: fixed;
+    top: 26px;
+    right: 30px;
+    width: 28px;
+    height: 23px;
+    margin-right: 8px;
+    cursor: pointer;
+    z-index: 4;
+  }
+
+  .header__mobile-menu {
+    display: none;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 520px;
+    height: 100%;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    background-color: white;
+    z-index: 3;
+  }
+}
+
+@media screen and (max-width: 456px) {
+  .header__auth-container {
+    width: calc(100% - 2 * 30px);
+    padding: 56px 0 50px;
+  }
+
+  .header_main-page {
+    font-size: 10px;
+  }
+
+  .header_button {
+    padding: 5px 12px;
+  }
+
+  .header__link_main-page {
+    font-size: 10px;
+  }
+
+  .header__link_signin {
+    font-size: 10px;
+    margin-left: 14px;
+  }
+
+  .header__link_button {
+    padding: 5px 12px;
+  }
+
+  .header__burger-button {
+    top: 27px;
+    right: 23px;
+    width: 22px;
+    height: 20.5px;
+  }
+
+  .header__burger-line,
+  .header__burger-line::before,
+  .header__burger-line::after {
+    height: 2.5px;
+  }
+
+  .header__burger-line::before {
+    content: '';
+    top: -6.5px;
+  }
+
+  .header__burger-line::after {
+    content: '';
+    top: 6.5px;
+  }
+
+  .header__mobile-menu-list {
+    padding-top: 144px;
+  }
+
+  .header__mobile-menu-item {
+    padding-bottom: 24px;
+  }
+
+  .header__mobile-menu-item_account {
+    bottom: 46px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__main-container {
+    padding: 0 14px;
+  }
+
+  .header__auth-container {
+    align-items: center;
+  }
+
+  .header__burger-button {
+    margin-right: 0;
+  }
+
+  .header__mobile-menu-item {
+    padding-bottom: 24px;
+  }
+
+  .header__link_mobile-active {
+    padding-bottom: 7px;
+  }
+}

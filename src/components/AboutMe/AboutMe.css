@@ -1,0 +1,168 @@
+.about-me {
+  width: 100%;
+  padding: 110px 70px 100px;
+  box-sizing: border-box;
+}
+
+.about-me__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid black;
+  padding-bottom: 23px;
+  letter-spacing: -0.04em;
+}
+
+.about-me__columns {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+  grid-template-areas: 'info photo';
+  gap: 50px;
+  padding-top: 66px;
+}
+
+.about-me__info {
+  max-width: 600px;
+  flex-direction: column;
+  align-items: flex-start;
+  grid-area: info;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-me__info-block {
+}
+
+.about-me__photo {
+  width: 100%;
+  height: 327px;
+  border-radius: 10px;
+  background-image: url('../../images/landing/about-me-photo.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  grid-area: photo;
+}
+
+.about-me__name {
+  padding-bottom: 18px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+.about-me__job {
+  margin: 0;
+  padding: 0 0 26px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.about-me__description {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.about-me__github-link {
+  padding-top: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  color: black;
+  transition: opacity 0.3s ease-out;
+}
+
+.about-me__github-link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 890px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+  .about-me__columns {
+    grid-template-columns: 1fr 255px;
+  }
+
+  .about-me__photo {
+    height: 307px;
+  }
+
+  .about-me__name {
+    padding-bottom: 16px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__job {
+    font-size: 12px;
+    line-height: 18px;
+    padding-bottom: 20px;
+  }
+
+  .about-me__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__github-link {
+    padding-top: 40px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .about-me {
+    padding: 70px 50px;
+  }
+
+  .about-me__columns {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'photo'
+      'info';
+    padding-top: 60px;
+    gap: 40px;
+  }
+
+  .about-me__photo {
+    max-width: 292px;
+    height: 352px;
+  }
+
+  .about-me__name {
+    padding-bottom: 20px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .about-me__job {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (max-width: 465px) {
+  .about-me {
+    padding: 70px 14px;
+  }
+
+  .about-me__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+}
