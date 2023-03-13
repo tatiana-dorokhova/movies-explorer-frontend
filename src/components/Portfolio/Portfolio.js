@@ -10,6 +10,8 @@ function Portfolio(props) {
           <a
             className="portfolio__link"
             href="https://tatiana-dorokhova.github.io/how-to-learn/"
+            target="_blank"
+            rel="noreferrer"
           >
             <p className="portfolio__link-text">Статичный&nbsp;сайт</p>
             <span>↗</span>
@@ -20,6 +22,8 @@ function Portfolio(props) {
           <a
             className="portfolio__link"
             href="https://tatiana-dorokhova.github.io/russian-travel/"
+            target="_blank"
+            rel="noreferrer"
           >
             <p className="portfolio__link-text">Адаптивный&nbsp;сайт</p>
             <span>↗</span>
@@ -30,6 +34,8 @@ function Portfolio(props) {
           <a
             className="portfolio__link"
             href="https://mesto.dorokhova.nomoredomains.work"
+            target="_blank"
+            rel="noreferrer"
           >
             <p className="portfolio__link-text">Одностраничное приложение</p>
             <span>↗</span>
