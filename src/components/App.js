@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
 import headerLogoImage from '../images/header/header-logo.svg';
 import burgerCloseButtonImage from '../images/header/header-burger-close-button.svg';
@@ -16,11 +17,7 @@ import PageNotFound from './PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Footer from './Footer/Footer';
 
-import {
-  initialMovies,
-  initialSavedMovies,
-  initialCurrentUser,
-} from '../utils/initialMovies';
+import { initialMovies, initialSavedMovies, initialCurrentUser } from '../utils/initialMovies';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState(initialCurrentUser);
@@ -65,58 +62,58 @@ function App() {
             isLoggedIn={isLoggedIn}
           />
           <Routes>
-            <Route
-              path="/sign-up"
-              element={<Register onAuth={onRegister} isNameRequired="true" />}
-            />
+            <Route path="/sign-up" element={<Register onAuth={onRegister} />} />
+
             <Route path="/sign-in" element={<Login onAuth={onLogin} />} />
+
+            <Route path="/" element={<Main />} />
+
             <Route
               path="/profile"
               element={
-                <Profile
-                  onAuth={onChangeProfile}
-                  title="Привет, currentUser.name!"
-                  formName="profile"
-                  inputName="Имя"
-                  inputEmail="E-mail"
-                  submitButtonName="Редактировать"
-                  route="/sign-in"
-                  profileSignoutButtonText="Выйти из аккаунта"
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    onAuth={onChangeProfile}
+                    title="Привет, currentUser.name!"
+                    formName="profile"
+                    inputName="Имя"
+                    inputEmail="E-mail"
+                    submitButtonName="Редактировать"
+                    route="/sign-in"
+                    profileSignoutButtonText="Выйти из аккаунта"
+                  />
+                </ProtectedRoute>
               }
             />
 
-            <Route path="/" element={<Main />} />
             <Route
               path="/movies"
               element={
-                isLoggedIn ? (
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Movies
                     movies={initialMovies}
                     isOn={isShortFilmSelected}
                     onSwitcherToggle={handleToggleInSearchForm}
                     onMovieSave={handleMovieSave}
                   />
-                ) : (
-                  <Navigate to="/sign-in" replace />
-                )
+                </ProtectedRoute>
               }
             />
+
             <Route
               path="/saved-movies"
               element={
-                isLoggedIn ? (
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <SavedMovies
                     movies={initialSavedMovies}
                     isOn={isShortFilmSelected}
                     onSwitcherToggle={handleToggleInSearchForm}
                     onMovieRemove={handleMovieRemove}
                   />
-                ) : (
-                  <Navigate to="/sign-in" replace />
-                )
+                </ProtectedRoute>
               }
             />
+
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Footer />
