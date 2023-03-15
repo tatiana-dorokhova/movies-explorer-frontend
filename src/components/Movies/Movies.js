@@ -5,11 +5,13 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 // import Preloader from '../Preloader/Preloader';
 
 function Movies(props) {
-  // const isUserLoggedIn = props.isLoggedIn;
-
   return (
     <>
-      <SearchForm isOn={props.isOn} onSwitcherToggle={props.onSwitcherToggle} />
+      <SearchForm
+        isOn={props.isOn}
+        onSwitcherToggle={props.onSwitcherToggle}
+        onSubmit={props.onSearchSubmit}
+      />
       <MoviesCardList
         movies={props.movies}
         onMovieSave={props.onMovieSave}

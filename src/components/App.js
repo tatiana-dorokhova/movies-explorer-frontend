@@ -29,6 +29,10 @@ function App() {
     setIsShortFilmSelected(!isShortFilmSelected);
   };
 
+  const handleSearch = () => {
+    console.log('handleSearch worked');
+  };
+
   const handleMovieSave = () => {
     console.log('handleMovieSave worked');
     setIsMovieSaved(!isMovieSaved);
@@ -95,6 +99,7 @@ function App() {
                     isOn={isShortFilmSelected}
                     onSwitcherToggle={handleToggleInSearchForm}
                     onMovieSave={handleMovieSave}
+                    onSearchSubmit={handleSearch}
                   />
                 </ProtectedRoute>
               }
