@@ -7,11 +7,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 function Movies(props) {
   return (
     <>
-      <SearchForm
-        isOn={props.isOn}
-        onSwitcherToggle={props.onSwitcherToggle}
-        onSubmit={props.onSearchSubmit}
-      />
+      <SearchForm onSubmit={props.onSearchSubmit} />
       <MoviesCardList
         movies={props.movies}
         onMovieSave={props.onMovieSave}

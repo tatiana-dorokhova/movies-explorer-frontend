@@ -21,15 +21,12 @@ function Header(props) {
 
   return (
     <header className="header">
-      {location.pathname === '/' && (
+      {location.pathname === '/' && !isUserLoggedIn && (
         <>
           <div className="header__main-container">
             <HeaderLogo logoSrc={props.logoSrc} logoAlt={props.logoAlt} />
             <div className="header__buttons-block">
-              <Link
-                to="/sign-up"
-                className="header__link header__link_main-page"
-              >
+              <Link to="/sign-up" className="header__link header__link_main-page">
                 Регистрация
               </Link>
               <Link
@@ -43,8 +40,7 @@ function Header(props) {
         </>
       )}
 
-      {(location.pathname === '/sign-up' ||
-        location.pathname === '/sign-in') && (
+      {(location.pathname === '/sign-up' || location.pathname === '/sign-in') && (
         <>
           <div className="header__auth-container">
             <HeaderLogo logoSrc={props.logoSrc} logoAlt={props.logoAlt} />
@@ -52,7 +48,8 @@ function Header(props) {
         </>
       )}
 
-      {(location.pathname === '/movies' ||
+      {(location.pathname === '/' ||
+        location.pathname === '/movies' ||
         location.pathname === '/saved-movies' ||
         location.pathname === '/profile') &&
         isUserLoggedIn && (
@@ -66,17 +63,11 @@ function Header(props) {
                 type="checkbox"
                 id="checkbox-mobile-menu"
               />
-              <label
-                className="header__burger-button"
-                htmlFor="checkbox-mobile-menu"
-              >
+              <label className="header__burger-button" htmlFor="checkbox-mobile-menu">
                 <span className="header__burger-line"></span>
               </label>
 
-              <label
-                className="header__mobile-menu-overlay"
-                htmlFor="checkbox-mobile-menu"
-              ></label>
+              <label className="header__mobile-menu-overlay" htmlFor="checkbox-mobile-menu"></label>
 
               {/* навигация по странице мобильного меню */}
               <nav className="header__mobile-menu">

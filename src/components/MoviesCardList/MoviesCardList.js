@@ -10,7 +10,7 @@ function MoviesCardList(props) {
         {props.movies.map((movie) => {
           return (
             <MoviesCard
-              key={movie._id}
+              key={movie.id} // в зависимости от роута id или _id
               movie={movie}
               onMovieSave={props.onMovieSave}
               onMovieRemove={props.onMovieRemove}

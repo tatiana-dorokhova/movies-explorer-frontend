@@ -11,19 +11,17 @@ function MoviesCard(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   // для отображения по роуту /movies делаем признак, сохранен фильм или нет
+  // для этого из local storage нужно забрать айдишники уже сохраненных пользователем фильмов
   const isSavedByThisUser = props.movie.owner._id === currentUser._id;
 
   const moviesButtonClassName = `movies-card__button${
     isSavedByThisUser ? '' : ' movies-card__button_marked'
   }`;
 
-  const savedMoviesButtonClassName =
-    'movies-card__button movies-card__button_remove';
+  const savedMoviesButtonClassName = 'movies-card__button movies-card__button_remove';
 
   const movieButtonClassName =
-    location.pathname === '/movies'
-      ? moviesButtonClassName
-      : savedMoviesButtonClassName;
+    location.pathname === '/movies' ? moviesButtonClassName : savedMoviesButtonClassName;
 
   function handleSaveButtonClick() {
     props.onMovieSave(props.movie);
@@ -38,17 +36,13 @@ function MoviesCard(props) {
       <div className="movies-card__header">
         <div className="movies-card__info">
           <h3 className="movies-card__film-name">{props.movie.nameRU}</h3>
-          <div className="movies-card__film-duration">
-            {props.movie.duration}
-          </div>
+          <div className="movies-card__film-duration">{props.movie.duration}</div>
         </div>
         <button
           className={movieButtonClassName}
           type="button"
           onClick={
-            location.pathname === '/movies'
-              ? handleSaveButtonClick
-              : handleRemoveButtonClick
+            location.pathname === '/movies' ? handleSaveButtonClick : handleRemoveButtonClick
           }
         ></button>
       </div>

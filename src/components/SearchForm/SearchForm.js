@@ -7,6 +7,12 @@ function SearchForm(props) {
   const [isSearchInputEmpty, setIsSearchInputEmpty] = React.useState(false);
   const [searchFieldValue, setSearchFieldValue] = React.useState(null);
 
+  const [isShortFilmSelected, setIsShortFilmSelected] = React.useState(false);
+
+  const handleShortFilmToggle = () => {
+    setIsShortFilmSelected(!isShortFilmSelected);
+  };
+
   const handleChange = (event) => {
     setSearchFieldValue(event.target.value);
   };
@@ -18,7 +24,7 @@ function SearchForm(props) {
     } else {
       event.preventDefault();
       setIsSearchInputEmpty(false);
-      props.onSubmit(searchFieldValue);
+      props.onSubmit({ searchRequest: searchFieldValue, selectShortFilms: isShortFilmSelected });
       setSearchFieldValue(null);
     }
   };
@@ -53,7 +59,7 @@ function SearchForm(props) {
         </form>
 
         <div className="search-form__switcher">
-          <FilterCheckbox isOn={props.isOn} onSwitcherToggle={props.onSwitcherToggle} />
+          <FilterCheckbox isOn={isShortFilmSelected} onSwitcherToggle={handleShortFilmToggle} />
           <p className="search-form__caption">Короткометражки</p>
         </div>
       </div>

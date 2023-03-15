@@ -1,5 +1,5 @@
-const EXTERNAL_API_URL = "https://api.nomoreparties.co/beatfilm-movies";
+const EXTERNAL_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
-const MAIN_API_URL = "";
+const MAIN_API_URL = 'https://api.ru';
 
-export default { EXTERNAL_API_URL, MAIN_API_URL };
+export { EXTERNAL_API_URL, MAIN_API_URL };

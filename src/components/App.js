@@ -1,11 +1,14 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
+// импорт изображений
 import headerLogoImage from '../images/header/header-logo.svg';
 import burgerCloseButtonImage from '../images/header/header-burger-close-button.svg';
 
+// импорт компонентов
 import Header from './Header/Header';
+import Footer from './Footer/Footer';
 import Main from './Main/Main';
 import Movies from './Movies/Movies';
 import SavedMovies from './SavedMovies/SavedMovies';
@@ -14,23 +17,36 @@ import Login from './Login/Login';
 import Profile from './Profile/Profile';
 import PageNotFound from './PageNotFound/PageNotFound';
 
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import Footer from './Footer/Footer';
+//импорт методов работы с апи
+import { getAllMovies } from '../utils/MoviesApi';
 
-import { initialMovies, initialSavedMovies, initialCurrentUser } from '../utils/initialMovies';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+import { initialSavedMovies, initialCurrentUser } from '../utils/initialMovies';
 
 function App() {
+  // состояния пользователя
   const [currentUser, setCurrentUser] = React.useState(initialCurrentUser);
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-  const [isShortFilmSelected, setIsShortFilmSelected] = React.useState(false);
+
+  // состояния страницы фильмов и сохраненных фильмов
+  const [moviesList, setMoviesList] = React.useState([]);
   const [isMovieSaved, setIsMovieSaved] = React.useState(false);
 
-  const handleToggleInSearchForm = () => {
-    setIsShortFilmSelected(!isShortFilmSelected);
-  };
-
-  const handleSearch = () => {
-    console.log('handleSearch worked');
+  const handleSearch = ({ searchRequest, selectShortFilms }) => {
+    // вызвать прелоадер
+    getAllMovies()
+      .then((movies) => {
+        console.log(movies);
+        localStorage.setItem('lastSearchRequest', searchRequest);
+        localStorage.setItem('selectShortFilms', selectShortFilms);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        setMoviesList(movies);
+      })
+      .catch((err) => {
+        // вызвать тултип с ошибкой err
+        console.log(err);
+      });
   };
 
   const handleMovieSave = () => {
@@ -95,9 +111,7 @@ function App() {
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Movies
-                    movies={initialMovies}
-                    isOn={isShortFilmSelected}
-                    onSwitcherToggle={handleToggleInSearchForm}
+                    movies={moviesList}
                     onMovieSave={handleMovieSave}
                     onSearchSubmit={handleSearch}
                   />
@@ -109,12 +123,7 @@ function App() {
               path="/saved-movies"
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <SavedMovies
-                    movies={initialSavedMovies}
-                    isOn={isShortFilmSelected}
-                    onSwitcherToggle={handleToggleInSearchForm}
-                    onMovieRemove={handleMovieRemove}
-                  />
+                  <SavedMovies movies={initialSavedMovies} onMovieRemove={handleMovieRemove} />
                 </ProtectedRoute>
               }
             />
