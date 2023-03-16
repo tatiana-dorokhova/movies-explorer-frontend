@@ -1,7 +1,6 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import LoadButton from '../LoadButton/LoadButton';
 
 function MoviesCardList(props) {
   return (
@@ -12,13 +11,13 @@ function MoviesCardList(props) {
             <MoviesCard
               key={movie.id} // в зависимости от роута id или _id
               movie={movie}
+              savedMovies={props.savedMovies}
               onMovieSave={props.onMovieSave}
               onMovieRemove={props.onMovieRemove}
             />
           );
         })}
       </section>
-      <LoadButton loadButtonName="Ещё" />
     </>
   );
 }

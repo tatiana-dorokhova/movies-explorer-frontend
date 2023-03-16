@@ -3,16 +3,13 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
 import React from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function MoviesCard(props) {
   const location = useLocation();
 
-  const currentUser = React.useContext(CurrentUserContext);
-
   // для отображения по роуту /movies делаем признак, сохранен фильм или нет
-  // для этого из local storage нужно забрать айдишники уже сохраненных пользователем фильмов
-  const isSavedByThisUser = props.movie.owner._id === currentUser._id;
+  // для этого ищем id фильма в списке сохраненных фильмов
+  const isSavedByThisUser = props.savedMovies.some((i) => i === props.movie.id);
 
   const moviesButtonClassName = `movies-card__button${
     isSavedByThisUser ? '' : ' movies-card__button_marked'

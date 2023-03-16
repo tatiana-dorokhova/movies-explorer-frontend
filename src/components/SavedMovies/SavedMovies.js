@@ -9,7 +9,7 @@ function SavedMovies(props) {
 
   return (
     <>
-      <SearchForm isOn={props.isOn} onSwitcherToggle={props.onSwitcherToggle} />
+      <SearchForm />
       <MoviesCardList
         movies={props.movies}
         onMovieSave={props.onMovieSave}

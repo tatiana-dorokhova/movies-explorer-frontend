@@ -46,12 +46,9 @@ export const initialMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -68,12 +65,9 @@ export const initialMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -90,12 +84,9 @@ export const initialMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -112,12 +103,9 @@ export const initialMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -134,12 +122,9 @@ export const initialMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -156,12 +141,9 @@ export const initialMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -181,18 +163,15 @@ export const initialSavedMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
       name: 'bbb',
     },
-    movieId: 444,
+    movieId: 1,
     nameRU: 'film3',
     nameEN: 'nameEN for bbb',
   },
@@ -203,18 +182,15 @@ export const initialSavedMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
       name: 'bbb',
     },
-    movieId: 555,
+    movieId: 2,
     nameRU: 'film4',
     nameEN: 'nameEN for bbb',
   },
@@ -225,12 +201,9 @@ export const initialSavedMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -247,12 +220,9 @@ export const initialSavedMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',
@@ -269,12 +239,9 @@ export const initialSavedMovies = [
     duration: '2m 22s',
     year: 'year для bbb',
     description: 'film2',
-    image:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    trailerLink:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
-    thumbnail:
-      'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    image: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    trailerLink: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
+    thumbnail: 'https://petzona.ru/wp-content/uploads/2019/02/sapsan-unikalnaya-ptitsa-2.jpg',
     owner: {
       _id: '63f903c181d12a232e6338af',
       email: 'bbb@ya.ru',

@@ -1,16 +1,24 @@
 // компонент со ссылками на другие проекты
 import './Movies.css';
 
+import { initialSavedMovies } from '../../utils/initialMovies';
+
 import React, { useEffect } from 'react';
+
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-// import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
+import MoviesSearchErrors from '../MoviesNotFound/MoviesSearchErrors';
+import LoadButton from '../LoadButton/LoadButton';
+
 import { getAllMovies } from '../../utils/MoviesApi';
 
 function Movies(props) {
   const [moviesList, setMoviesList] = React.useState([]);
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [lastSearchQuery, setLastSearchQuery] = React.useState('');
   const [isShortFilmsOn, setIsShortFilmsOn] = React.useState(false);
+
+  const [savedMovies, setSavedMovies] = React.useState([]);
 
   const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [errorWhileSearching, setErrorWhileSearching] = React.useState(false);
@@ -27,28 +35,65 @@ function Movies(props) {
     if (initialMovies) {
       setMoviesList(JSON.parse(initialMovies));
     }
-    if (searchQuery) {
-      setSearchQuery(JSON.parse(initialSearchQuery));
+    if (lastSearchQuery) {
+      setLastSearchQuery(JSON.parse(initialSearchQuery));
     }
     if (isShortFilmsOn) {
       setIsShortFilmsOn(JSON.parse(initialShortFilms));
     }
-  });
+  }, []);
+
+  // для правильной отрисовки иконки сохраненного фильма в роуте /movies
+  // достать список сохраненных фильмов из MainApi, чтобы отрисовываться по movie.id
+  useEffect(() => {
+    setSavedMovies(initialSavedMovies);
+  }, []);
+
+  // поиск фильмов по заданному searchQuery
+  const findFilmsBySearchQuery = ({ films, searchQuery }) => {
+    console.log('films = ', films);
+    console.log('searchQuery = ', searchQuery);
+
+    return films.filter((film) => {
+      return (
+        film.nameEN.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
+        film.nameRU.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
+        film.director.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+      );
+    });
+  };
 
   const handleSearch = ({ searchQuery, shortFilms }) => {
+    // убрать ошибку, если она была на предыдущем поиске
+    setErrorWhileSearching(false);
+    // убрать сообщение о том, что ничего не найдено
+    setIsNothingFound(false);
     // вызвать прелоадер
+    setIsDataLoading(true);
+    // загрузить все фильмы
     getAllMovies()
       .then((movies) => {
-        // сделать выборку по реквесту, полученный результат положить в хранилище
-        console.log(movies);
+        // отобрать только фильмы, подходящие под строку поиска
+        const filmsBySearchQuery = findFilmsBySearchQuery({ films: movies, searchQuery });
+        // если ничего не найдено, поменять переменную состояния
+        if (filmsBySearchQuery.length === 0) {
+          console.log('filmsBySearchQuery.length === 0');
+          setIsNothingFound(true);
+        }
+        // положить в localStorage
         localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
         localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
-        localStorage.setItem('movies', JSON.stringify(movies));
-        setMoviesList(movies);
+        localStorage.setItem('movies', JSON.stringify(filmsBySearchQuery));
+        // поменять переменные состояния
+        setMoviesList(filmsBySearchQuery);
+        setLastSearchQuery(searchQuery);
       })
-      .catch((err) => {
-        // вызвать тултип с ошибкой err
-        console.log(err);
+      .catch(() => {
+        setErrorWhileSearching(true);
+      })
+      .finally(() => {
+        // убрать прелоадер
+        setIsDataLoading(false);
       });
   };
 
@@ -63,13 +108,32 @@ function Movies(props) {
   return (
     <>
       <SearchForm onSubmit={handleSearch} />
-      {/* сюда положить условие, что рисовать этот блок только если карточки есть */}
-      <MoviesCardList
-        movies={moviesList}
-        onMovieSave={handleMovieSave}
-        onMovieRemove={handleMovieRemove}
-      />
-      {/* <Preloader /> */}
+      {/* блок с карточками отображается, если: 
+       1. не крутится прелоадер 
+       2. список карточек не пустой
+       3. не возникло ошибки при поиске
+       */}
+      {!isDataLoading && !isNothingFound && !errorWhileSearching && (
+        <MoviesCardList
+          movies={moviesList}
+          savedMovies={savedMovies.map((element) => element.movieId)}
+          onMovieSave={handleMovieSave}
+          onMovieRemove={handleMovieRemove}
+        />
+      )}
+
+      {isNothingFound && <MoviesSearchErrors errorText="Ничего не найдено" />}
+
+      {errorWhileSearching && (
+        <MoviesSearchErrors
+          errorText="Во время запроса произошла ошибка. Возможно, проблема с соединением
+          или сервер недоступен. Подождите немного и попробуйте ещё раз."
+        />
+      )}
+
+      {isDataLoading && <Preloader />}
+
+      <LoadButton loadButtonName="Ещё" />
     </>
   );
 }

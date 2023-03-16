@@ -87,7 +87,7 @@ function App() {
               path="/saved-movies"
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <SavedMovies movies={initialSavedMovies} onMovieRemove={handleMovieRemove} />
+                  <SavedMovies movies={initialSavedMovies} />
                 </ProtectedRoute>
               }
             />
