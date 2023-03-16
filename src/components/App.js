@@ -17,9 +17,6 @@ import Login from './Login/Login';
 import Profile from './Profile/Profile';
 import PageNotFound from './PageNotFound/PageNotFound';
 
-//импорт методов работы с апи
-import { getAllMovies } from '../utils/MoviesApi';
-
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 import { initialSavedMovies, initialCurrentUser } from '../utils/initialMovies';
@@ -28,35 +25,6 @@ function App() {
   // состояния пользователя
   const [currentUser, setCurrentUser] = React.useState(initialCurrentUser);
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-
-  // состояния страницы фильмов и сохраненных фильмов
-  const [moviesList, setMoviesList] = React.useState([]);
-  const [isMovieSaved, setIsMovieSaved] = React.useState(false);
-
-  const handleSearch = ({ searchRequest, selectShortFilms }) => {
-    // вызвать прелоадер
-    getAllMovies()
-      .then((movies) => {
-        console.log(movies);
-        localStorage.setItem('lastSearchRequest', searchRequest);
-        localStorage.setItem('selectShortFilms', selectShortFilms);
-        localStorage.setItem('movies', JSON.stringify(movies));
-        setMoviesList(movies);
-      })
-      .catch((err) => {
-        // вызвать тултип с ошибкой err
-        console.log(err);
-      });
-  };
-
-  const handleMovieSave = () => {
-    console.log('handleMovieSave worked');
-    setIsMovieSaved(!isMovieSaved);
-  };
-
-  const handleMovieRemove = () => {
-    console.log('onMovieRemove worked');
-  };
 
   function onLogin({ email, password }) {
     console.log('onLogin worked: email = ', email, ' password = ', password);
@@ -110,11 +78,7 @@ function App() {
               path="/movies"
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Movies
-                    movies={moviesList}
-                    onMovieSave={handleMovieSave}
-                    onSearchSubmit={handleSearch}
-                  />
+                  <Movies />
                 </ProtectedRoute>
               }
             />
