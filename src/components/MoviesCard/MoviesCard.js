@@ -45,8 +45,8 @@ function MoviesCard(props) {
       </div>
       <img
         className="movies-card__image"
-        src={props.movie.thumbnail}
-        alt={props.movie.name}
+        src={`https://api.nomoreparties.co/${props.movie.image.url}`}
+        alt={props.movie.nameRU}
         // onClick={handleImageClick}
       />
     </article>

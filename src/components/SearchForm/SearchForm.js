@@ -1,13 +1,13 @@
 // форма поиска, куда пользователь будет вводить запрос
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import React from 'react';
+import React, { useState } from 'react';
 
 function SearchForm(props) {
-  const [isSearchInputEmpty, setIsSearchInputEmpty] = React.useState(false);
-  const [searchFieldValue, setSearchFieldValue] = React.useState(null);
+  const [isSearchInputEmpty, setIsSearchInputEmpty] = useState(false);
+  const [searchFieldValue, setSearchFieldValue] = useState(null);
 
-  const [isShortFilmSelected, setIsShortFilmSelected] = React.useState(false);
+  const [isShortFilmSelected, setIsShortFilmSelected] = useState(false);
 
   const handleShortFilmToggle = () => {
     setIsShortFilmSelected(!isShortFilmSelected);
