@@ -34,25 +34,15 @@ function Movies(props) {
     const initialShortFilms = localStorage.getItem('shortFilms');
     // если данные есть, записать их в переменные состояния
     if (initialMovies) {
-      console.log('initialMovies sind da');
       setMoviesList(JSON.parse(initialMovies));
     }
-    if (lastSearchQuery) {
+    if (initialSearchQuery) {
       setLastSearchQuery(JSON.parse(initialSearchQuery));
     }
-    if (isShortFilmsOn) {
+    if (initialShortFilms) {
       setIsShortFilmsOn(JSON.parse(initialShortFilms));
     }
   }, []);
-
-  console.log(
-    'moviesList = ',
-    moviesList,
-    'lastSearchQuery = ',
-    lastSearchQuery,
-    'isShortFilmsOn = ',
-    isShortFilmsOn,
-  );
 
   // для правильной отрисовки иконки сохраненного фильма в роуте /movies
   // достать список сохраненных фильмов из MainApi, чтобы отрисовываться по movie.id
@@ -60,19 +50,7 @@ function Movies(props) {
     setSavedMovies(initialSavedMovies);
   }, []);
 
-  // отобрать только фильмы, подходящие под строку поиска
-  const filmsBySearchQuery = findFilmsBySearchQuery({
-    films: moviesList,
-    searchQuery: lastSearchQuery,
-  });
-
   const handleSearch = ({ searchQuery, shortFilms }) => {
-    // записать в localStorage фильтр и значение свитчера
-    localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
-    localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
-    // поменять переменные состояния
-    setLastSearchQuery(searchQuery);
-    setIsShortFilmsOn(shortFilms);
     // скинуть состояние пустого результата
     setIsNothingFound(false);
 
@@ -87,7 +65,7 @@ function Movies(props) {
         .then((movies) => {
           // положить в localStorage список загруженных фильмов
           localStorage.setItem('movies', JSON.stringify(movies));
-          setMoviesList(movies);
+          setMoviesList(movies); // setMoviesList is async operation
         })
         .catch(() => {
           setErrorWhileSearching(true);
@@ -99,9 +77,22 @@ function Movies(props) {
     }
 
     // если ничего не найдено, поменять переменную состояния
-    if (filmsBySearchQuery.length === 0) {
+    if (
+      findFilmsBySearchQuery({
+        films: moviesList,
+        searchQuery,
+      }).length === 0
+    ) {
       setIsNothingFound(true);
     }
+
+    // записать в localStorage фильтр и значение свитчера
+    localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
+    localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
+
+    // поменять переменные состояния
+    setLastSearchQuery(searchQuery);
+    setIsShortFilmsOn(shortFilms);
   };
 
   const handleMovieSave = () => {
@@ -122,7 +113,10 @@ function Movies(props) {
        */}
       {!isDataLoading && !isNothingFound && !errorWhileSearching && (
         <MoviesCardList
-          movies={filmsBySearchQuery}
+          movies={findFilmsBySearchQuery({
+            films: moviesList,
+            searchQuery: lastSearchQuery,
+          })}
           savedMovies={savedMovies.map((element) => element.movieId)}
           onMovieSave={handleMovieSave}
           onMovieRemove={handleMovieRemove}
