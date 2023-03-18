@@ -12,6 +12,7 @@ import MoviesSearchErrors from '../MoviesNotFound/MoviesSearchErrors';
 import LoadButton from '../LoadButton/LoadButton';
 
 import { getAllMovies } from '../../utils/MoviesApi';
+import { findFilmsBySearchQuery } from '../../utils/MoviesHandler';
 
 function Movies(props) {
   const [moviesList, setMoviesList] = React.useState([]);
@@ -33,6 +34,7 @@ function Movies(props) {
     const initialShortFilms = localStorage.getItem('shortFilms');
     // если данные есть, записать их в переменные состояния
     if (initialMovies) {
+      console.log('initialMovies sind da');
       setMoviesList(JSON.parse(initialMovies));
     }
     if (lastSearchQuery) {
@@ -43,58 +45,63 @@ function Movies(props) {
     }
   }, []);
 
+  console.log(
+    'moviesList = ',
+    moviesList,
+    'lastSearchQuery = ',
+    lastSearchQuery,
+    'isShortFilmsOn = ',
+    isShortFilmsOn,
+  );
+
   // для правильной отрисовки иконки сохраненного фильма в роуте /movies
   // достать список сохраненных фильмов из MainApi, чтобы отрисовываться по movie.id
   useEffect(() => {
     setSavedMovies(initialSavedMovies);
   }, []);
 
-  // поиск фильмов по заданному searchQuery
-  const findFilmsBySearchQuery = ({ films, searchQuery }) => {
-    console.log('films = ', films);
-    console.log('searchQuery = ', searchQuery);
-
-    return films.filter((film) => {
-      return (
-        film.nameEN.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
-        film.nameRU.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
-        film.director.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
-      );
-    });
-  };
+  // отобрать только фильмы, подходящие под строку поиска
+  const filmsBySearchQuery = findFilmsBySearchQuery({
+    films: moviesList,
+    searchQuery: lastSearchQuery,
+  });
 
   const handleSearch = ({ searchQuery, shortFilms }) => {
-    // убрать ошибку, если она была на предыдущем поиске
-    setErrorWhileSearching(false);
-    // убрать сообщение о том, что ничего не найдено
+    // записать в localStorage фильтр и значение свитчера
+    localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
+    localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
+    // поменять переменные состояния
+    setLastSearchQuery(searchQuery);
+    setIsShortFilmsOn(shortFilms);
+    // скинуть состояние пустого результата
     setIsNothingFound(false);
-    // вызвать прелоадер
-    setIsDataLoading(true);
-    // загрузить все фильмы
-    getAllMovies()
-      .then((movies) => {
-        // отобрать только фильмы, подходящие под строку поиска
-        const filmsBySearchQuery = findFilmsBySearchQuery({ films: movies, searchQuery });
-        // если ничего не найдено, поменять переменную состояния
-        if (filmsBySearchQuery.length === 0) {
-          console.log('filmsBySearchQuery.length === 0');
-          setIsNothingFound(true);
-        }
-        // положить в localStorage
-        localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
-        localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
-        localStorage.setItem('movies', JSON.stringify(filmsBySearchQuery));
-        // поменять переменные состояния
-        setMoviesList(filmsBySearchQuery);
-        setLastSearchQuery(searchQuery);
-      })
-      .catch(() => {
-        setErrorWhileSearching(true);
-      })
-      .finally(() => {
-        // убрать прелоадер
-        setIsDataLoading(false);
-      });
+
+    // загрузить все фильмы, если в local storage пусто
+    if (!localStorage.getItem('movies')) {
+      // вызвать прелоадер
+      setIsDataLoading(true);
+      // скинуть состояние ошибки (она может возникать только при загрузке с бэка)
+      setErrorWhileSearching(false);
+
+      getAllMovies()
+        .then((movies) => {
+          // положить в localStorage список загруженных фильмов
+          localStorage.setItem('movies', JSON.stringify(movies));
+          setMoviesList(movies);
+        })
+        .catch(() => {
+          setErrorWhileSearching(true);
+        })
+        .finally(() => {
+          // убрать прелоадер
+          setIsDataLoading(false);
+        });
+    }
+
+    // если ничего не найдено, поменять переменную состояния
+    if (filmsBySearchQuery.length === 0) {
+      setIsNothingFound(true);
+    }
   };
 
   const handleMovieSave = () => {
@@ -115,7 +122,7 @@ function Movies(props) {
        */}
       {!isDataLoading && !isNothingFound && !errorWhileSearching && (
         <MoviesCardList
-          movies={moviesList}
+          movies={filmsBySearchQuery}
           savedMovies={savedMovies.map((element) => element.movieId)}
           onMovieSave={handleMovieSave}
           onMovieRemove={handleMovieRemove}
