@@ -28,8 +28,10 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
-  margin: 0;
-  padding-bottom: 9px;
+  margin: 0 0 9px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .movies-card__film-duration {
@@ -56,6 +58,10 @@
 
 .movies-card__button_remove {
   background-image: url('../../images/movies/movies-card-remove-button.svg');
+}
+
+.movies-card__image-container {
+  width: 100%;
 }
 
 .movies-card__image {

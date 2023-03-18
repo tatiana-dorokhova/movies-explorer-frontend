@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 
 import React from 'react';
 
+import { formatDuration } from '../../utils/MoviesHandler';
+
 function MoviesCard(props) {
   const location = useLocation();
 
@@ -33,7 +35,7 @@ function MoviesCard(props) {
       <div className="movies-card__header">
         <div className="movies-card__info">
           <h3 className="movies-card__film-name">{props.movie.nameRU}</h3>
-          <div className="movies-card__film-duration">{props.movie.duration}</div>
+          <div className="movies-card__film-duration">{formatDuration(props.movie.duration)}</div>
         </div>
         <button
           className={movieButtonClassName}
@@ -43,12 +45,18 @@ function MoviesCard(props) {
           }
         ></button>
       </div>
-      <img
-        className="movies-card__image"
-        src={`https://api.nomoreparties.co/${props.movie.image.url}`}
-        alt={props.movie.nameRU}
-        // onClick={handleImageClick}
-      />
+      <a
+        className="movies-card__image-container"
+        href={props.movie.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="movies-card__image"
+          src={`https://api.nomoreparties.co/${props.movie.image.url}`}
+          alt={props.movie.nameRU}
+        />
+      </a>
     </article>
   );
 }
