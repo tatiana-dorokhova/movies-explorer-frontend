@@ -12,7 +12,7 @@ import MoviesSearchErrors from '../MoviesNotFound/MoviesSearchErrors';
 import LoadButton from '../LoadButton/LoadButton';
 
 import { getAllMovies } from '../../utils/MoviesApi';
-import { findFilmsBySearchQuery } from '../../utils/MoviesHandler';
+import { findMoviesBySearchQuery } from '../../utils/MoviesHandler';
 
 function Movies(props) {
   const [moviesList, setMoviesList] = React.useState([]);
@@ -21,7 +21,6 @@ function Movies(props) {
 
   const [savedMovies, setSavedMovies] = React.useState([]);
 
-  const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [errorWhileSearching, setErrorWhileSearching] = React.useState(false);
 
   // для отображения и скрытия прелоадера
@@ -51,9 +50,6 @@ function Movies(props) {
   }, []);
 
   const handleSearch = ({ searchQuery, shortFilms }) => {
-    // скинуть состояние пустого результата
-    setIsNothingFound(false);
-
     // загрузить все фильмы, если в local storage пусто
     if (!localStorage.getItem('movies')) {
       // вызвать прелоадер
@@ -76,16 +72,6 @@ function Movies(props) {
         });
     }
 
-    // если ничего не найдено, поменять переменную состояния
-    if (
-      findFilmsBySearchQuery({
-        films: moviesList,
-        searchQuery,
-      }).length === 0
-    ) {
-      setIsNothingFound(true);
-    }
-
     // записать в localStorage фильтр и значение свитчера
     localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
     localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
@@ -94,6 +80,11 @@ function Movies(props) {
     setLastSearchQuery(searchQuery);
     setIsShortFilmsOn(shortFilms);
   };
+
+  const moviesBySearchQuery = findMoviesBySearchQuery({
+    films: moviesList,
+    searchQuery: lastSearchQuery,
+  });
 
   const handleMovieSave = () => {
     console.log('handleMovieSave worked');
@@ -111,21 +102,20 @@ function Movies(props) {
        2. список карточек не пустой
        3. не возникло ошибки при поиске
        */}
-      {!isDataLoading && !isNothingFound && !errorWhileSearching && (
+      {!isDataLoading && moviesBySearchQuery.length !== 0 && !errorWhileSearching && (
         <MoviesCardList
-          movies={findFilmsBySearchQuery({
-            films: moviesList,
-            searchQuery: lastSearchQuery,
-          })}
+          movies={moviesBySearchQuery}
           savedMovies={savedMovies.map((element) => element.movieId)}
           onMovieSave={handleMovieSave}
           onMovieRemove={handleMovieRemove}
         />
       )}
 
-      {isNothingFound && <MoviesSearchErrors errorText="Ничего не найдено" />}
+      {!isDataLoading && moviesBySearchQuery.length === 0 && lastSearchQuery && (
+        <MoviesSearchErrors errorText="Ничего не найдено" />
+      )}
 
-      {errorWhileSearching && (
+      {!isDataLoading && errorWhileSearching && (
         <MoviesSearchErrors
           errorText="Во время запроса произошла ошибка. Возможно, проблема с соединением
           или сервер недоступен. Подождите немного и попробуйте ещё раз."

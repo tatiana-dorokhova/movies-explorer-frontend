@@ -1,5 +1,5 @@
 // регистронезависимый поиск фильмов по заданному фильтру
-export const findFilmsBySearchQuery = ({ films, searchQuery }) => {
+export const findMoviesBySearchQuery = ({ films, searchQuery }) => {
   return films.filter((film) => {
     return (
       film.nameEN.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
