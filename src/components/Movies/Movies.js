@@ -90,10 +90,6 @@ function Movies(props) {
     console.log('handleMovieSave worked');
   };
 
-  const handleMovieRemove = () => {
-    console.log('onMovieRemove worked');
-  };
-
   return (
     <>
       <SearchForm onSubmit={handleSearch} />
@@ -107,7 +103,6 @@ function Movies(props) {
           movies={moviesBySearchQuery}
           savedMovies={savedMovies.map((element) => element.movieId)}
           onMovieSave={handleMovieSave}
-          onMovieRemove={handleMovieRemove}
         />
       )}
 

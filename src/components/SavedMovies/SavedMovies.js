@@ -7,14 +7,14 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 function SavedMovies(props) {
   // const isUserLoggedIn = props.isLoggedIn;
 
+  const handleMovieRemove = () => {
+    console.log('onMovieRemove worked');
+  };
+
   return (
     <>
       <SearchForm />
-      <MoviesCardList
-        movies={props.movies}
-        onMovieSave={props.onMovieSave}
-        onMovieRemove={props.onMovieRemove}
-      />
+      <MoviesCardList movies={props.movies} onMovieRemove={handleMovieRemove} />
       {/* <Preloader /> */}
     </>
   );
