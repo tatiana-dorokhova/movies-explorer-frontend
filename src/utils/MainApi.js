@@ -22,6 +22,7 @@ class Api {
   // загрузка всех сохраненных фильмов
   getSavedCards() {
     return fetch(`${this._baseUrl}/movies`, {
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._handlePromise(res));
   }
@@ -41,6 +42,7 @@ class Api {
     nameEN,
   }) {
     return fetch(`${this._baseUrl}/movies`, {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -62,6 +64,7 @@ class Api {
   // удаление фильма
   deleteMovie(cardId) {
     return fetch(`${this._baseUrl}/movies`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
     }).then((res) => this._handlePromise(res));
@@ -71,6 +74,7 @@ class Api {
   // свойство _id в ответе — это идентификатор пользователя
   getUser() {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._handlePromise(res));
   }
@@ -79,6 +83,7 @@ class Api {
   // свойство _id в ответе — это идентификатор пользователя
   editUser({ newUserName, newUserAbout }) {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -87,6 +92,32 @@ class Api {
       }),
     }).then((res) => this._handlePromise(res));
   }
+
+  register = ({ name, email, password }) => {
+    return fetch(`${this._baseUrl}/signup`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ name, email, password }),
+    }).then((res) => this._handlePromise(res));
+  };
+
+  login = ({ email, password }) => {
+    return fetch(`${this._baseUrl}/signin`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ email, password }),
+    }).then((res) => this._handlePromise(res));
+  };
+
+  signout = () => {
+    return fetch(`${this._baseUrl}/signout`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: this._headers,
+    }).then((res) => this._handlePromise(res));
+  };
 }
 
 export const api = new Api({

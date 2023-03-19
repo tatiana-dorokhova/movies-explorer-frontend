@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
 // импорт изображений
@@ -20,18 +20,59 @@ import PageNotFound from './PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 import { initialSavedMovies, initialCurrentUser } from '../utils/initialMovies';
+import { api } from '../utils/MainApi';
 
 function App() {
   // состояния пользователя
   const [currentUser, setCurrentUser] = React.useState(initialCurrentUser);
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
-  function onLogin({ email, password }) {
-    console.log('onLogin worked: email = ', email, ' password = ', password);
+  const navigate = useNavigate();
+
+  function onRegister({ name, email, password }) {
+    api
+      .register({ name, email, password })
+      .then((res) => {
+        // если пришел корректный ответ,
+        // перейти на страницу логина
+        if (res) {
+          onLogin({ email, password });
+        }
+      })
+      // если в ответе ошибка,
+      // остаться на странице регистрации
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  function onRegister({ email, password }) {
-    console.log('onRegister worked: email = ', email, ' password = ', password);
+  function onLogin({ email, password }) {
+    api
+      .login({ email, password })
+      .then((res) => {
+        if (res) {
+          setCurrentUser(res);
+          setIsLoggedIn(true);
+          navigate('/movies');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function onSignOut() {
+    // почистить куку
+    api
+      .signout()
+      .then(() => {
+        setCurrentUser({});
+        setIsLoggedIn(false);
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function onChangeProfile({ name, email }) {
@@ -69,6 +110,7 @@ function App() {
                     submitButtonName="Редактировать"
                     route="/sign-in"
                     profileSignoutButtonText="Выйти из аккаунта"
+                    onSignOut={onSignOut}
                   />
                 </ProtectedRoute>
               }
