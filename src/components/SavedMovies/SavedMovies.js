@@ -5,8 +5,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function SavedMovies(props) {
-  // const isUserLoggedIn = props.isLoggedIn;
-
   const handleMovieRemove = () => {
     console.log('onMovieRemove worked');
   };
@@ -15,7 +13,6 @@ function SavedMovies(props) {
     <>
       <SearchForm />
       <MoviesCardList movies={props.movies} onMovieRemove={handleMovieRemove} />
-      {/* <Preloader /> */}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { EXTERNAL_API_URL } from '../utils/constants';
 
 export const getAllMovies = () => {
-  return fetch(`${EXTERNAL_API_URL}/`, {
+  return fetch(`${EXTERNAL_API_URL}/beatfilm-movies`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import React from 'react';
 
+import { EXTERNAL_API_URL } from '../../utils/constants';
 import { formatDuration } from '../../utils/MoviesHandler';
 
 function MoviesCard(props) {
@@ -52,7 +53,7 @@ function MoviesCard(props) {
       >
         <img
           className="movies-card__image"
-          src={`https://api.nomoreparties.co/${props.movie.image.url}`}
+          src={`${EXTERNAL_API_URL}${props.movie.image.url}`}
           alt={props.movie.nameRU}
         />
       </a>

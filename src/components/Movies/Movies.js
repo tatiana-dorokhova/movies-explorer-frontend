@@ -3,7 +3,7 @@ import './Movies.css';
 
 import { initialSavedMovies } from '../../utils/initialMovies';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -12,19 +12,20 @@ import MoviesSearchErrors from '../MoviesNotFound/MoviesSearchErrors';
 import LoadButton from '../LoadButton/LoadButton';
 
 import { getAllMovies } from '../../utils/MoviesApi';
+import { api } from '../../utils/MainApi';
 import { findMoviesBySearchQuery } from '../../utils/MoviesHandler';
 
 function Movies(props) {
-  const [moviesList, setMoviesList] = React.useState([]);
-  const [lastSearchQuery, setLastSearchQuery] = React.useState('');
-  const [isShortFilmsOn, setIsShortFilmsOn] = React.useState(false);
+  const [moviesList, setMoviesList] = useState([]);
+  const [lastSearchQuery, setLastSearchQuery] = useState('');
+  const [isShortFilmsOn, setIsShortFilmsOn] = useState(false);
 
-  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
-  const [errorWhileSearching, setErrorWhileSearching] = React.useState(false);
+  const [errorWhileSearching, setErrorWhileSearching] = useState(false);
 
   // для отображения и скрытия прелоадера
-  const [isDataLoading, setIsDataLoading] = React.useState(false);
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   useEffect(() => {
     // при монтировании компонента достать данные из local storage
@@ -46,7 +47,14 @@ function Movies(props) {
   // для правильной отрисовки иконки сохраненного фильма в роуте /movies
   // достать список сохраненных фильмов из MainApi, чтобы отрисовываться по movie.id
   useEffect(() => {
-    setSavedMovies(initialSavedMovies);
+    api
+      .getSavedCards()
+      .then((savedMovies) => {
+        setSavedMovies(savedMovies);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handleSearch = ({ searchQuery, shortFilms }) => {
@@ -86,8 +94,21 @@ function Movies(props) {
     searchQuery: lastSearchQuery,
   });
 
-  const handleMovieSave = () => {
-    console.log('handleMovieSave worked');
+  const handleMovieSave = (movie) => {
+    console.log('movie = ', movie);
+    // если фильм сохраненный, то отправить запрос на удаление
+
+    // если не сохраненный, то запрос на добавление
+    api
+      .saveMovie(movie)
+      .then((newMovie) => {
+        setSavedMovies((savedMovies) => [...savedMovies, newMovie]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    console.log('savedMovies = ', savedMovies);
   };
 
   return (
