@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
@@ -19,13 +19,13 @@ import PageNotFound from './PageNotFound/PageNotFound';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-import { initialSavedMovies, initialCurrentUser } from '../utils/initialMovies';
+import { initialCurrentUser } from '../utils/initialMovies';
 import { api } from '../utils/MainApi';
 
 function App() {
   // состояния пользователя
-  const [currentUser, setCurrentUser] = React.useState(initialCurrentUser);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [currentUser, setCurrentUser] = useState(initialCurrentUser);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const navigate = useNavigate();
 
@@ -129,7 +129,7 @@ function App() {
               path="/saved-movies"
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <SavedMovies movies={initialSavedMovies} />
+                  <SavedMovies />
                 </ProtectedRoute>
               }
             />

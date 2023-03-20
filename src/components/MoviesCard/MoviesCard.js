@@ -10,14 +10,10 @@ import { formatDuration } from '../../utils/MoviesHandler';
 function MoviesCard(props) {
   const location = useLocation();
 
-  // для отображения по роуту /movies делаем признак, сохранен фильм или нет
-  // для этого ищем id фильма в списке сохраненных фильмов
-  // savedMovies - это массив movieId сохраненных фильмов
+  // вычисляем класс кнопки
   const movieButtonClassName = () => {
     if (location.pathname === '/movies') {
-      const isSavedByThisUser = props.savedMovies.some((i) => i === props.movie.id);
-
-      return `movies-card__button${isSavedByThisUser ? '' : ' movies-card__button_marked'}`;
+      return `movies-card__button${props.isMovieSaved ? '' : ' movies-card__button_marked'}`;
     }
     return 'movies-card__button movies-card__button_remove';
   };
@@ -41,7 +37,9 @@ function MoviesCard(props) {
           className={movieButtonClassName()}
           type="button"
           onClick={
-            location.pathname === '/movies' ? handleSaveButtonClick : handleRemoveButtonClick
+            location.pathname === '/movies' && !props.isMovieSaved
+              ? handleSaveButtonClick
+              : handleRemoveButtonClick
           }
         ></button>
       </div>

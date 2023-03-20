@@ -57,6 +57,10 @@ function Movies(props) {
       });
   }, []);
 
+  function handleChangeSavedMovies(movies) {
+    setSavedMovies(movies);
+  }
+
   const handleSearch = ({ searchQuery, shortFilms }) => {
     // загрузить все фильмы, если в local storage пусто
     if (!localStorage.getItem('movies')) {
@@ -84,32 +88,14 @@ function Movies(props) {
     localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
     localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
 
-    // поменять переменные состояния
+    // поменять переменную состояния (переменная isShortFilmsOn меняется при работе свитчера)
     setLastSearchQuery(searchQuery);
-    setIsShortFilmsOn(shortFilms);
   };
 
   const moviesBySearchQuery = findMoviesBySearchQuery({
     films: moviesList,
     searchQuery: lastSearchQuery,
   });
-
-  const handleMovieSave = (movie) => {
-    console.log('movie = ', movie);
-    // если фильм сохраненный, то отправить запрос на удаление
-
-    // если не сохраненный, то запрос на добавление
-    api
-      .saveMovie(movie)
-      .then((newMovie) => {
-        setSavedMovies((savedMovies) => [...savedMovies, newMovie]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    console.log('savedMovies = ', savedMovies);
-  };
 
   return (
     <>
@@ -122,8 +108,8 @@ function Movies(props) {
       {!isDataLoading && moviesBySearchQuery.length !== 0 && !errorWhileSearching && (
         <MoviesCardList
           movies={moviesBySearchQuery}
-          savedMovies={savedMovies.map((element) => element.movieId)}
-          onMovieSave={handleMovieSave}
+          savedMovies={savedMovies}
+          onChangeSavedMovies={handleChangeSavedMovies}
         />
       )}
 

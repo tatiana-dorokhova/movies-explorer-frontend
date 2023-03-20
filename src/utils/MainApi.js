@@ -62,8 +62,8 @@ class Api {
   }
 
   // удаление фильма
-  deleteMovie(cardId) {
-    return fetch(`${this._baseUrl}/movies`, {
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
       credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
