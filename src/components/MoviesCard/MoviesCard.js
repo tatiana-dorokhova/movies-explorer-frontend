@@ -51,7 +51,11 @@ function MoviesCard(props) {
       >
         <img
           className="movies-card__image"
-          src={`${EXTERNAL_API_URL}${props.movie.image.url}`}
+          src={
+            location.pathname === '/movies'
+              ? `${EXTERNAL_API_URL}${props.movie.image.url}`
+              : `${props.movie.image}`
+          }
           alt={props.movie.nameRU}
         />
       </a>
