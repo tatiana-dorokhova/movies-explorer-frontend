@@ -88,18 +88,24 @@ function Movies(props) {
     localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
     localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
 
-    // поменять переменную состояния (переменная isShortFilmsOn меняется при работе свитчера)
+    // поменять переменные состояния
     setLastSearchQuery(searchQuery);
+    setIsShortFilmsOn(shortFilms);
   };
 
   const moviesBySearchQuery = findMoviesBySearchQuery({
-    films: moviesList,
+    movies: moviesList,
     searchQuery: lastSearchQuery,
+    shortFilms: isShortFilmsOn,
   });
 
   return (
     <>
-      <SearchForm onSubmit={handleSearch} />
+      <SearchForm
+        onSubmit={handleSearch}
+        lastSearchQuery={lastSearchQuery}
+        isShortFilmsOn={isShortFilmsOn}
+      />
       {/* блок с карточками отображается, если: 
        1. не крутится прелоадер 
        2. список карточек не пустой

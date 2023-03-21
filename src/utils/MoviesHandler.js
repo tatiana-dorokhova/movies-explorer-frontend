@@ -1,12 +1,16 @@
 // регистронезависимый поиск фильмов по заданному фильтру
-export const findMoviesBySearchQuery = ({ films, searchQuery }) => {
-  return films.filter((film) => {
-    return (
+export const findMoviesBySearchQuery = ({ movies, searchQuery, shortFilms }) => {
+  // найдем все фильмы по searchQuery
+  const allMovies = movies.filter(
+    (film) =>
       film.nameEN.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
-      film.nameRU.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 ||
-      film.director.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
-    );
-  });
+      film.nameRU.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1,
+  );
+  // отфильтруем их, если нужно, по shortFilms
+  if (shortFilms) {
+    return allMovies.filter((film) => film.duration <= 40);
+  }
+  return allMovies;
 };
 
 export const formatDuration = (totalMinutes) => {

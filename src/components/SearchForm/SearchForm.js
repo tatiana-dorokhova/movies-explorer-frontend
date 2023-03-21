@@ -1,13 +1,25 @@
 // форма поиска, куда пользователь будет вводить запрос
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function SearchForm(props) {
   const [isSearchInputEmpty, setIsSearchInputEmpty] = useState(false);
   const [searchFieldValue, setSearchFieldValue] = useState(null);
 
   const [isShortFilmSelected, setIsShortFilmSelected] = useState(false);
+
+  console.log('props.isShortFilmsOn = ', props.isShortFilmsOn);
+  console.log('props.lastSearchQuery = ', props.lastSearchQuery);
+
+  useEffect(() => {
+    if (props.lastSearchQuery) {
+      setIsSearchInputEmpty(false);
+      setSearchFieldValue(props.lastSearchQuery);
+    }
+  }, [props.lastSearchQuery, props.isShortFilmsOn]);
+
+  console.log('isSearchInputEmpty = ', isSearchInputEmpty);
 
   const handleShortFilmToggle = () => {
     setIsShortFilmSelected(!isShortFilmSelected);
@@ -25,7 +37,7 @@ function SearchForm(props) {
       event.preventDefault();
       setIsSearchInputEmpty(false);
       props.onSubmit({ searchQuery: searchFieldValue, shortFilms: isShortFilmSelected });
-      setSearchFieldValue(null);
+      //setSearchFieldValue(null);
     }
   };
 
@@ -39,7 +51,7 @@ function SearchForm(props) {
             <input
               className="search-form__input"
               type="text"
-              value={searchFieldValue ?? ''}
+              value={searchFieldValue ?? props.lastSearchQuery}
               onChange={handleChange}
               name="search-form-input"
               placeholder="Фильм"
