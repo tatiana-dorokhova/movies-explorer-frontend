@@ -8,7 +8,7 @@ function AuthForm(props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const [isNameValid, setIsNameValid] = React.useState(false);
+  const [isNameValid, setIsNameValid] = React.useState(true);
   const [isEmailValid, setIsEmailValid] = React.useState(false);
   const [isPasswordValid, setIsPasswordValid] = React.useState(false);
 

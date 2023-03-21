@@ -16,6 +16,7 @@ function SearchForm(props) {
     if (props.lastSearchQuery) {
       setIsSearchInputEmpty(false);
       setSearchFieldValue(props.lastSearchQuery);
+      setIsShortFilmSelected(props.isShortFilmsOn);
     }
   }, [props.lastSearchQuery, props.isShortFilmsOn]);
 
@@ -37,7 +38,6 @@ function SearchForm(props) {
       event.preventDefault();
       setIsSearchInputEmpty(false);
       props.onSubmit({ searchQuery: searchFieldValue, shortFilms: isShortFilmSelected });
-      //setSearchFieldValue(null);
     }
   };
 
