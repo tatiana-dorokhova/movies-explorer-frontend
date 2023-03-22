@@ -82,6 +82,7 @@ function App() {
       .then(() => {
         setCurrentUser({});
         setIsLoggedIn(false);
+        localStorage.clear();
         navigate('/');
       })
       .catch((err) => {
