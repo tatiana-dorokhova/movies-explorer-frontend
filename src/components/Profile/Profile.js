@@ -84,7 +84,7 @@ function Profile(props) {
           </button>
         </form>
 
-        <Link to={props.route} className="profile__link">
+        <Link to="/" className="profile__link" onClick={props.onSignOut}>
           {props.profileSignoutButtonText}
         </Link>
       </div>

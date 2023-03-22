@@ -129,7 +129,6 @@ function App() {
                     title={`Привет, ${currentUser.name}!`}
                     formName="profile"
                     submitButtonName="Редактировать"
-                    route="/sign-in"
                     profileSignoutButtonText="Выйти из аккаунта"
                     onSignOut={onSignOut}
                   />
