@@ -17,8 +17,8 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.onEditProfile({
-      name: values['name'],
-      email: values['email'],
+      name: values.name,
+      email: values.email,
     });
   }
 
@@ -39,18 +39,18 @@ function Profile(props) {
               className="profile__input"
               type="text"
               name="name"
-              value={values['name'] ?? ''}
+              value={values.name ?? ''}
               onChange={handleChange}
               required
             />
             <span
               className={
-                errors['name']
+                errors.name
                   ? 'profile__input-error profile__input-error_visible profile__input-error_above'
                   : 'profile__input-error'
               }
             >
-              {errors['name'] && 'Неверный формат имени'}
+              {errors.name && 'Поле не заполнено или неверный формат имени'}
             </span>
           </label>
 
@@ -60,18 +60,18 @@ function Profile(props) {
               className="profile__input"
               type="email"
               name="email"
-              value={values['email'] ?? ''}
+              value={values.email ?? ''}
               onChange={handleChange}
               required
             />
             <span
               className={
-                errors['email']
+                errors.email
                   ? 'profile__input-error profile__input-error_visible profile__input-error_under'
                   : 'profile__input-error'
               }
             >
-              {errors['email'] && 'Неверный формат email, проверьте, что поле содержит символ @'}
+              {errors.email && 'Поле не заполнено или неверный формат email'}
             </span>
           </label>
 
