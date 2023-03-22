@@ -9,7 +9,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   // const [values, setValues] = useState({ name: 'currentUser', email: 'props.email' });
-  const [values, setValues] = useState({ name: currentUser, email: props.email });
+  const [values, setValues] = useState({ name: currentUser.name, email: props.email });
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -21,9 +21,9 @@ function Profile(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onAuth({
-      name: values[props.inputName],
-      email: values[props.inputEmail],
+    props.onEditProfile({
+      name: values['name'],
+      email: values['email'],
     });
   }
 
@@ -43,8 +43,8 @@ function Profile(props) {
             <input
               className="profile__input"
               type="text"
-              name={props.inputName}
-              value={values[props.inputName] ?? ''}
+              name="name"
+              value={values['name'] ?? ''}
               onChange={handleChange}
               required
             />
@@ -55,8 +55,8 @@ function Profile(props) {
             <input
               className="profile__input"
               type="email"
-              name={props.inputEmail}
-              value={values[props.inputEmail] ?? ''}
+              name="email"
+              value={values['email'] ?? ''}
               onChange={handleChange}
               required
             />

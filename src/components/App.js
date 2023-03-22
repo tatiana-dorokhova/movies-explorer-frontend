@@ -91,8 +91,17 @@ function App() {
       });
   }
 
-  function onChangeProfile({ name, email }) {
-    console.log('onRegister worked: name = ', name, ' email = ', email);
+  function onEditProfile({ name, email }) {
+    api
+      .editUser({ name, email })
+      .then((editedProfile) => {
+        setCurrentUser(editedProfile);
+        setIsLoggedIn(true);
+        setEmail(editedProfile.email);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -119,11 +128,9 @@ function App() {
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Profile
                     email={email}
-                    onAuth={onChangeProfile}
+                    onEditProfile={onEditProfile}
                     title={`Привет, ${currentUser.name}!`}
                     formName="profile"
-                    inputName="Имя"
-                    inputEmail="E-mail"
                     submitButtonName="Редактировать"
                     route="/sign-in"
                     profileSignoutButtonText="Выйти из аккаунта"

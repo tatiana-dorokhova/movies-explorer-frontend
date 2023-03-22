@@ -81,14 +81,14 @@ class Api {
 
   // редактирование профиля
   // свойство _id в ответе — это идентификатор пользователя
-  editUser({ newUserName, newUserAbout }) {
+  editUser({ name, email }) {
     return fetch(`${this._baseUrl}/users/me`, {
       credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: newUserName,
-        about: newUserAbout,
+        name,
+        email,
       }),
     }).then((res) => this._handlePromise(res));
   }
