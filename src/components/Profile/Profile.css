@@ -32,6 +32,7 @@
   align-items: center;
   border-bottom: 1px solid #e8e8e8;
   height: 45px;
+  position: relative;
 }
 
 .profile__label:last-of-type {
@@ -46,6 +47,32 @@
   font-size: 11px;
   line-height: 13px;
   text-align: end;
+}
+
+.profile__input-error {
+  display: none;
+  width: 100%;
+  height: 12px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  margin-top: 6px;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  color: #ff4062;
+}
+
+.profile__input-error_visible {
+  display: block;
+}
+
+.profile__input-error_above {
+  bottom: 47px;
+}
+
+.profile__input-error_under {
+  top: 47px;
 }
 
 .profile__submit-button {

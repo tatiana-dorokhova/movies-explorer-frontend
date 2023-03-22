@@ -97,11 +97,7 @@ function AuthForm(props) {
         </label>
 
         <button
-          className={
-            isNameValid && isEmailValid && isPasswordValid
-              ? 'auth__submit-button'
-              : 'auth__submit-button auth__submit-button_inactive'
-          }
+          className={'auth__submit-button'}
           disabled={isNameValid && isEmailValid && isPasswordValid ? false : true}
           type="submit"
         >

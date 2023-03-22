@@ -256,4 +256,5 @@ export const initialSavedMovies = [
 export const initialCurrentUser = {
   _id: '63f8a3c181d12a232e6338af',
   name: 'Tanya',
+  email: 'tanya@ya.ru',
 };

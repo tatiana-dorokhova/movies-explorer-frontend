@@ -1,23 +1,18 @@
 // компонент страницы изменения профиля
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Profile.css';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../utils/UseFormHook';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
-  // const [values, setValues] = useState({ name: 'currentUser', email: 'props.email' });
-  const [values, setValues] = useState({ name: currentUser.name, email: props.email });
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
+  const { values, handleChange, errors, isValid } = useFormWithValidation({
+    name: currentUser.name,
+    email: currentUser.email,
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -48,6 +43,15 @@ function Profile(props) {
               onChange={handleChange}
               required
             />
+            <span
+              className={
+                errors['name']
+                  ? 'profile__input-error profile__input-error_visible profile__input-error_above'
+                  : 'profile__input-error'
+              }
+            >
+              {errors['name'] && 'Неверный формат имени'}
+            </span>
           </label>
 
           <label className="profile__label">
@@ -60,9 +64,22 @@ function Profile(props) {
               onChange={handleChange}
               required
             />
+            <span
+              className={
+                errors['email']
+                  ? 'profile__input-error profile__input-error_visible profile__input-error_under'
+                  : 'profile__input-error'
+              }
+            >
+              {errors['email'] && 'Неверный формат email, проверьте, что поле содержит символ @'}
+            </span>
           </label>
 
-          <button className="profile__submit-button" type="submit">
+          <button
+            className="profile__submit-button"
+            disabled={isValid ? false : true}
+            type="submit"
+          >
             {props.submitButtonName}
           </button>
         </form>

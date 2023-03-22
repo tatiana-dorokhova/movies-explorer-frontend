@@ -26,7 +26,6 @@ function App() {
   // состояния пользователя
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [email, setEmail] = useState('');
 
   const navigate = useNavigate();
 
@@ -37,7 +36,6 @@ function App() {
       .then((userProfile) => {
         setIsLoggedIn(true);
         setCurrentUser(userProfile);
-        setEmail(userProfile.email);
         navigate('/movies');
       })
       .catch((err) => {
@@ -97,7 +95,6 @@ function App() {
       .then((editedProfile) => {
         setCurrentUser(editedProfile);
         setIsLoggedIn(true);
-        setEmail(editedProfile.email);
       })
       .catch((err) => {
         console.log(err);
@@ -127,7 +124,6 @@ function App() {
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Profile
-                    email={email}
                     onEditProfile={onEditProfile}
                     title={`Привет, ${currentUser.name}!`}
                     formName="profile"

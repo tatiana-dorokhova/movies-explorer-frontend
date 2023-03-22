@@ -38,10 +38,6 @@
   cursor: pointer;
 }
 
-.auth__submit-button_inactive {
-  background-color: #a0a0a0;
-}
-
 .auth__link {
   text-decoration: none;
   margin-left: 6px;
