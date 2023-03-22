@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
@@ -24,10 +24,26 @@ import { api } from '../utils/MainApi';
 
 function App() {
   // состояния пользователя
-  const [currentUser, setCurrentUser] = useState(initialCurrentUser);
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [email, setEmail] = useState('');
 
   const navigate = useNavigate();
+
+  // проверяем по куке, авторизован ли уже пользователь
+  useEffect(() => {
+    api
+      .getUser()
+      .then((userProfile) => {
+        setIsLoggedIn(true);
+        setCurrentUser(userProfile);
+        setEmail(userProfile.email);
+        navigate('/movies');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function onRegister({ name, email, password }) {
     api
@@ -102,8 +118,9 @@ function App() {
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Profile
+                    email={email}
                     onAuth={onChangeProfile}
-                    title="Привет, currentUser.name!"
+                    title={`Привет, ${currentUser.name}!`}
                     formName="profile"
                     inputName="Имя"
                     inputEmail="E-mail"

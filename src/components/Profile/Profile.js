@@ -1,11 +1,15 @@
 // компонент страницы изменения профиля
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Profile.css';
 
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 function Profile(props) {
-  const [values, setValues] = React.useState({});
+  const currentUser = useContext(CurrentUserContext);
+  // const [values, setValues] = useState({ name: 'currentUser', email: 'props.email' });
+  const [values, setValues] = useState({ name: currentUser, email: props.email });
 
   function handleChange(event) {
     const { name, value } = event.target;
