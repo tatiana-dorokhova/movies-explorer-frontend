@@ -18,16 +18,8 @@ function MoviesCardList(props) {
       .deleteMovie(idToRemove)
       .then(() => {
         if (location.pathname === '/movies') {
-          console.log(
-            'props.savedMovies.filter((item) => item.movieId !== movie.id) = ',
-            props.savedMovies.filter((item) => item.movieId !== movie.id),
-          );
           props.onChangeSavedMovies(props.savedMovies.filter((item) => item.movieId !== movie.id));
         } else {
-          console.log(
-            'props.movies.filter((item) => item.movieId !== movie.id) = ',
-            props.movies.filter((item) => item.movieId !== movie.id),
-          );
           props.onChangeSavedMovies(props.movies.filter((item) => item.movieId !== movie.movieId));
         }
       })
@@ -71,7 +63,7 @@ function MoviesCardList(props) {
       </>
     );
   }
-  // если страница сохраненных фильмов, то по кнопке фильм удалить и переменную состояния в app изменить
+  // если страница сохраненных фильмов, то по кнопке фильм нужно удалить, переменную состояния в app изменить
   return (
     <>
       <section className="movies-list" aria-label="movies-cards">

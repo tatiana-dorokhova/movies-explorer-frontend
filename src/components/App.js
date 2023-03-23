@@ -19,13 +19,13 @@ import PageNotFound from './PageNotFound/PageNotFound';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-import { initialCurrentUser } from '../utils/initialMovies';
+// import { initialCurrentUser } from '../utils/initialMovies';
 import { api } from '../utils/MainApi';
 
 function App() {
   // состояния пользователя
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 

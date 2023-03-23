@@ -9,9 +9,6 @@ function SearchForm(props) {
 
   const [isShortFilmSelected, setIsShortFilmSelected] = useState(false);
 
-  console.log('props.isShortFilmsOn = ', props.isShortFilmsOn);
-  console.log('props.lastSearchQuery = ', props.lastSearchQuery);
-
   useEffect(() => {
     if (props.lastSearchQuery) {
       setIsSearchInputEmpty(false);
@@ -19,8 +16,6 @@ function SearchForm(props) {
       setIsShortFilmSelected(props.isShortFilmsOn);
     }
   }, [props.lastSearchQuery, props.isShortFilmsOn]);
-
-  console.log('isSearchInputEmpty = ', isSearchInputEmpty);
 
   const handleShortFilmToggle = () => {
     setIsShortFilmSelected(!isShortFilmSelected);

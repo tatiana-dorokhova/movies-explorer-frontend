@@ -5,6 +5,14 @@
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
 
+.movies-list:nth-child(n + 13) {
+  display: none;
+}
+
+.movies-card_visible {
+  display: block;
+}
+
 .movies-card__header {
   margin: 0;
   width: 100%;
