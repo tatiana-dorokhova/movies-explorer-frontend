@@ -6,9 +6,9 @@ function LoadButton(props) {
   const [startItemsCount, setStartItemsCount] = useState(0);
   const [itemsToShowCount, setItemsToShowCount] = useState(0);
 
-  // повесить листнер на изменение ширины экрана при монтировании компонента
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    // вычислить текущую ширину и установить значения в зависимости от нее
+    function calcWidth() {
       if (window.innerWidth >= 1280) {
         setStartItemsCount(12);
         setItemsToShowCount(3);
@@ -19,7 +19,9 @@ function LoadButton(props) {
         setStartItemsCount(5);
         setItemsToShowCount(2);
       }
-    });
+    }
+    // повесить листнер на изменение ширины экрана при монтировании компонента
+    window.addEventListener('resize', calcWidth());
   }, []);
 
   const showMore = document.querySelector('.load-button');
