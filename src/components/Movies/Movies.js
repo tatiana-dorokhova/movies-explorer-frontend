@@ -1,8 +1,6 @@
 // компонент со ссылками на другие проекты
 import './Movies.css';
 
-import { initialSavedMovies } from '../../utils/initialMovies';
-
 import React, { useEffect, useState } from 'react';
 
 import SearchForm from '../SearchForm/SearchForm';
@@ -16,33 +14,50 @@ import { api } from '../../utils/MainApi';
 import { findMoviesBySearchQuery } from '../../utils/MoviesHandler';
 
 function Movies(props) {
+  // все фильмы, полученные с сервера
   const [moviesList, setMoviesList] = useState([]);
   const [lastSearchQuery, setLastSearchQuery] = useState('');
   const [isShortFilmsOn, setIsShortFilmsOn] = useState(false);
-
+  // все сохраненные фильмы из нашей БД
   const [savedMovies, setSavedMovies] = useState([]);
 
+  //состояние при ошибке запроса к серверу
   const [errorWhileSearching, setErrorWhileSearching] = useState(false);
 
-  // для отображения и скрытия прелоадера
+  // состояние для отображения и скрытия прелоадера
   const [isDataLoading, setIsDataLoading] = useState(false);
 
+  // состояние для отображения нужного количества карточек
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [itemsCount, setItemsCount] = useState({ startValue: 0, addItemsCount: 0 });
+
+  const [isShowMoreButtonVisible, setIsShowMoreButtonVisible] = useState(true);
+  // все найденные по фильтрам фильмы
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  // фильмы для рендера в MoviesCardList
+  const [moviesToShow, setMoviesToShow] = useState([]);
+
   useEffect(() => {
-    // при монтировании компонента достать данные из local storage
-    const initialMovies = localStorage.getItem('movies');
-    const initialSearchQuery = localStorage.getItem('searchQuery');
-    const initialShortFilms = localStorage.getItem('shortFilms');
-    // если данные есть, записать их в переменные состояния
-    if (initialMovies) {
-      setMoviesList(JSON.parse(initialMovies));
+    // вычислить текущую ширину экрана и установить состояния в зависимости от нее
+    function resizeWidthCount() {
+      if (window.innerWidth >= 1280) {
+        setItemsCount({ startValue: 12, addItemsCount: 3 });
+      } else if (window.innerWidth >= 636) {
+        setItemsCount({ startValue: 8, addItemsCount: 2 });
+      } else {
+        setItemsCount({ startValue: 5, addItemsCount: 2 });
+      }
     }
-    if (initialSearchQuery) {
-      setLastSearchQuery(JSON.parse(initialSearchQuery));
-    }
-    if (initialShortFilms) {
-      setIsShortFilmsOn(JSON.parse(initialShortFilms));
-    }
-  }, []);
+
+    setWindowWidth(window.innerWidth);
+
+    // повесить листнер на изменение ширины экрана
+    window.addEventListener('resize', resizeWidthCount());
+    // удалить листнер при размонтировании
+    return () => {
+      window.removeEventListener('resize', resizeWidthCount());
+    };
+  }, [windowWidth]);
 
   // для правильной отрисовки иконки сохраненного фильма в роуте /movies
   // достать список сохраненных фильмов из MainApi, чтобы отрисовываться по movie.id
@@ -56,6 +71,34 @@ function Movies(props) {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    // при монтировании компонента достать данные из local storage
+    const initialMovies = localStorage.getItem('movies');
+    const initialSearchQuery = localStorage.getItem('searchQuery');
+    const initialShortFilms = localStorage.getItem('shortFilms');
+    // если данные есть, записать их в переменные состояния
+    if (initialMovies) {
+      const parsedInitialMovies = JSON.parse(initialMovies);
+      setMoviesList(parsedInitialMovies);
+      setMoviesToShow(parsedInitialMovies.slice(0, itemsCount.startValue)); //не работает startValue
+    }
+    if (initialSearchQuery) {
+      setLastSearchQuery(JSON.parse(initialSearchQuery));
+    }
+    if (initialShortFilms) {
+      setIsShortFilmsOn(JSON.parse(initialShortFilms));
+    }
+  }, [itemsCount.startValue]);
+
+  // показывать кнопку Еще
+  useEffect(() => {
+    if (filteredMovies.length >= 3) setIsShowMoreButtonVisible(true);
+  }, [filteredMovies]);
+
+  console.log('MoviesList = ', moviesList);
+
+  console.log('MoviesToShow = ', moviesToShow);
 
   function handleChangeSavedMovies(movies) {
     setSavedMovies(movies);
@@ -91,13 +134,29 @@ function Movies(props) {
     // поменять переменные состояния
     setLastSearchQuery(searchQuery);
     setIsShortFilmsOn(shortFilms);
+
+    const moviesBySearchQuery = findMoviesBySearchQuery({
+      movies: moviesList,
+      searchQuery: searchQuery,
+      shortFilms: shortFilms,
+    });
+
+    if (moviesBySearchQuery.length >= 3) {
+      setIsShowMoreButtonVisible(true);
+    } else setIsShowMoreButtonVisible(false);
+
+    setFilteredMovies(moviesBySearchQuery);
+    setMoviesToShow(moviesBySearchQuery.slice(0, itemsCount.startValue));
   };
 
-  const moviesBySearchQuery = findMoviesBySearchQuery({
-    movies: moviesList,
-    searchQuery: lastSearchQuery,
-    shortFilms: isShortFilmsOn,
-  });
+  const handleShowMoreButton = () => {
+    const addedMovies = filteredMovies.slice(0, moviesToShow.length + itemsCount.addItemsCount);
+    setMoviesToShow(addedMovies);
+    // не отображать кнопку Ещё, когда отображаемый массив станет >= исходному
+    if (addedMovies.length >= filteredMovies.length) {
+      setIsShowMoreButtonVisible(false);
+    } else setIsShowMoreButtonVisible(true);
+  };
 
   return (
     <>
@@ -111,18 +170,21 @@ function Movies(props) {
        2. список карточек не пустой
        3. не возникло ошибки при поиске
        */}
-      {!isDataLoading && moviesBySearchQuery.length !== 0 && !errorWhileSearching && (
+      {!isDataLoading && moviesToShow.length !== 0 && !errorWhileSearching && (
         <>
           <MoviesCardList
-            movies={moviesBySearchQuery}
+            movies={moviesToShow}
             savedMovies={savedMovies}
             onChangeSavedMovies={handleChangeSavedMovies}
           />
-          <LoadButton startMoviesCardCount={moviesBySearchQuery.length} />
+          <LoadButton
+            isButtonVisible={isShowMoreButtonVisible}
+            onShowMoreButton={handleShowMoreButton}
+          />
         </>
       )}
 
-      {!isDataLoading && moviesBySearchQuery.length === 0 && lastSearchQuery && (
+      {!isDataLoading && moviesToShow.length === 0 && lastSearchQuery && (
         <MoviesSearchErrors errorText="Ничего не найдено" />
       )}
 
