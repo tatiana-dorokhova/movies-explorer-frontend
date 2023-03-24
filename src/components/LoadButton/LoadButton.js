@@ -31,9 +31,21 @@ function LoadButton(props) {
   console.log('селектор кнопки showMore = ', showMore);
   console.log('коллекция всех карточек с фильмами moviesList = ', moviesList);
 
+  // если количество найденных карточек <= startItemsCount, то кнопку Еще скрыть
+  if (moviesList.length <= startItemsCount) {
+    showMore.style.display = 'none';
+  }
+  // если карточек больше startItemsCount, то лишним добавить класс hidden
+  else {
+    const invisibleItems = Array.from(moviesList).slice(startItemsCount);
+    invisibleItems.forEach((element) => {
+      element.classList.add('movies-card_hidden');
+    });
+  }
+
   // начальное видимое количество карточек
   let items = moviesList.length < startItemsCount ? moviesList.length : startItemsCount;
-  console.log('начальное видимое количество карточек items = ', items);
+  console.log('количество видимых карточек items = ', items);
 
   const handleShowMoreButton = () => {
     items += itemsToShowCount;
