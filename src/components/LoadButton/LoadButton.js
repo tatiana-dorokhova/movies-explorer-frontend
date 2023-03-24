@@ -1,7 +1,27 @@
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './LoadButton.css';
 
 function LoadButton(props) {
+  const [startItemsCount, setStartItemsCount] = useState(0);
+  const [itemsToShowCount, setItemsToShowCount] = useState(0);
+
+  // повесить листнер на изменение ширины экрана при монтировании компонента
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1280) {
+        setStartItemsCount(12);
+        setItemsToShowCount(3);
+      } else if (window.innerWidth >= 636) {
+        setStartItemsCount(8);
+        setItemsToShowCount(2);
+      } else {
+        setStartItemsCount(5);
+        setItemsToShowCount(2);
+      }
+    });
+  }, []);
+
   const showMore = document.querySelector('.load-button');
   // коллекция всех карточек с фильмами
   const moviesList = document.querySelectorAll('.movies-card');
@@ -10,11 +30,11 @@ function LoadButton(props) {
   console.log('коллекция всех карточек с фильмами moviesList = ', moviesList);
 
   // начальное видимое количество карточек
-  let items = moviesList.length < 12 ? moviesList.length : 12;
+  let items = moviesList.length < startItemsCount ? moviesList.length : startItemsCount;
   console.log('начальное видимое количество карточек items = ', items);
 
   const handleShowMoreButton = () => {
-    items += 3;
+    items += itemsToShowCount;
     const arrayOfItems = Array.from(moviesList);
     // массив видимых элементов после нажатия на кнопку
     const visibleItems = arrayOfItems.slice(0, items);
