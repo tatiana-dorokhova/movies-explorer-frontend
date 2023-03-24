@@ -5,10 +5,6 @@
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
 
-.movies-card_visible {
-  display: block !important;
-}
-
 .movies-card_hidden {
   display: none;
 }

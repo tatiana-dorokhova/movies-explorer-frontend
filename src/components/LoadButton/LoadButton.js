@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import './LoadButton.css';
 
 function LoadButton(props) {
   const [startItemsCount, setStartItemsCount] = useState(0);
   const [itemsToShowCount, setItemsToShowCount] = useState(0);
+  const [isShowMoreButtonActive, setIsShowMoreButtonActive] = useState(true);
 
   useEffect(() => {
     // вычислить текущую ширину и установить значения в зависимости от нее
@@ -24,48 +24,53 @@ function LoadButton(props) {
     window.addEventListener('resize', calcWidth());
   }, []);
 
-  const showMore = document.querySelector('.load-button');
-  // коллекция всех карточек с фильмами
-  const moviesList = document.querySelectorAll('.movies-card');
+  // если количество найденных карточек меньше startItemsCount,
+  // то кнопку Еще скрыть
+  useEffect(() => {
+    if (props.startMoviesCardCount <= startItemsCount) {
+      setIsShowMoreButtonActive(false);
+    }
+  }, []);
 
-  console.log('селектор кнопки showMore = ', showMore);
+  console.log('isShowMoreButtonActive = ', isShowMoreButtonActive);
+
+  // коллекция всех карточек с фильмами
+  const moviesList = Array.from(document.querySelectorAll('.movies-card'));
+
   console.log('коллекция всех карточек с фильмами moviesList = ', moviesList);
 
-  // если количество найденных карточек <= startItemsCount, то кнопку Еще скрыть
-  if (moviesList.length <= startItemsCount) {
-    showMore.style.display = 'none';
-  }
-  // если карточек больше startItemsCount, то лишним добавить класс hidden
-  else {
-    const invisibleItems = Array.from(moviesList).slice(startItemsCount);
+  // если количество найденных карточек > startItemsCount,
+  // то карточкам добавить класс hidden
+  if (moviesList.length > startItemsCount) {
+    const invisibleItems = moviesList.slice(startItemsCount);
+    console.log('invisibleItems = ', invisibleItems);
     invisibleItems.forEach((element) => {
       element.classList.add('movies-card_hidden');
     });
   }
 
   // начальное видимое количество карточек
-  let items = moviesList.length < startItemsCount ? moviesList.length : startItemsCount;
+  let items = startItemsCount;
   console.log('количество видимых карточек items = ', items);
 
   const handleShowMoreButton = () => {
     items += itemsToShowCount;
-    const arrayOfItems = Array.from(moviesList);
     // массив видимых элементов после нажатия на кнопку
-    const visibleItems = arrayOfItems.slice(0, items);
+    const visibleItems = moviesList.slice(0, items);
     console.log('массив видимых элементов после нажатия на кнопку visibleItems = ', visibleItems);
 
     visibleItems.forEach((element) => {
-      element.classList.add('movies-card_visible');
+      element.classList.remove('movies-card_hidden');
     });
 
     if (visibleItems.length === moviesList.length) {
-      showMore.style.display = 'none';
+      setIsShowMoreButtonActive(false);
     }
   };
 
-  const location = useLocation();
-  const loadButtonClassName =
-    location.pathname === '/movies' ? 'load-button' : 'load-button load-button_hidden';
+  const loadButtonClassName = isShowMoreButtonActive
+    ? 'load-button'
+    : 'load-button load-button_hidden';
 
   return (
     <div className="load-button__container">

@@ -132,7 +132,7 @@ function Movies(props) {
 
       {isDataLoading && <Preloader />}
 
-      <LoadButton loadButtonName="Ещё" />
+      <LoadButton startMoviesCardCount={moviesBySearchQuery.length} />
     </>
   );
 }
