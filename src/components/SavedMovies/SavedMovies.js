@@ -1,6 +1,5 @@
 // компонент страницы с сохранёнными карточками фильмов
 import './SavedMovies.css';
-import { initialSavedMovies } from '../../utils/initialMovies';
 
 import React, { useState, useEffect } from 'react';
 import { api } from '../../utils/MainApi';
@@ -11,7 +10,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { findMoviesBySearchQuery } from '../../utils/MoviesHandler';
 
 function SavedMovies(props) {
-  const [savedMovies, setSavedMovies] = useState(initialSavedMovies);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [lastSearchQuery, setLastSearchQuery] = useState('');
   const [isShortFilmsOn, setIsShortFilmsOn] = useState(false);
 
