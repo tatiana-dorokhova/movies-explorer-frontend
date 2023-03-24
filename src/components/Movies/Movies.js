@@ -112,11 +112,14 @@ function Movies(props) {
        3. не возникло ошибки при поиске
        */}
       {!isDataLoading && moviesBySearchQuery.length !== 0 && !errorWhileSearching && (
-        <MoviesCardList
-          movies={moviesBySearchQuery}
-          savedMovies={savedMovies}
-          onChangeSavedMovies={handleChangeSavedMovies}
-        />
+        <>
+          <MoviesCardList
+            movies={moviesBySearchQuery}
+            savedMovies={savedMovies}
+            onChangeSavedMovies={handleChangeSavedMovies}
+          />
+          <LoadButton startMoviesCardCount={moviesBySearchQuery.length} />
+        </>
       )}
 
       {!isDataLoading && moviesBySearchQuery.length === 0 && lastSearchQuery && (
@@ -131,8 +134,6 @@ function Movies(props) {
       )}
 
       {isDataLoading && <Preloader />}
-
-      <LoadButton startMoviesCardCount={moviesBySearchQuery.length} />
     </>
   );
 }
