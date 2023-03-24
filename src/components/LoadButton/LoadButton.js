@@ -27,8 +27,10 @@ function LoadButton(props) {
   // если количество найденных карточек меньше startItemsCount,
   // то кнопку Еще скрыть
   useEffect(() => {
-    props.startMoviesCardCount <= startItemsCount && setIsShowMoreButtonActive(false);
-  }, []);
+    if (props.startMoviesCardCount <= startItemsCount) {
+      setIsShowMoreButtonActive(false);
+    } else setIsShowMoreButtonActive(true);
+  }, [props.startMoviesCardCount]);
 
   console.log('props.startMoviesCardCount = ', props.startMoviesCardCount);
   console.log('startItemsCount = ', startItemsCount);
