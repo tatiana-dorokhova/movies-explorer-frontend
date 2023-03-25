@@ -73,6 +73,7 @@ function Movies(props) {
   }, []);
 
   useEffect(() => {
+    console.log('mount component movies');
     // при монтировании компонента достать данные из local storage
     const initialMovies = localStorage.getItem('movies');
     const initialSearchQuery = localStorage.getItem('searchQuery');
@@ -81,7 +82,6 @@ function Movies(props) {
     if (initialMovies) {
       const parsedInitialMovies = JSON.parse(initialMovies);
       setMoviesList(parsedInitialMovies);
-      setMoviesToShow(parsedInitialMovies.slice(0, itemsCount.startValue));
     }
     if (initialSearchQuery) {
       setLastSearchQuery(JSON.parse(initialSearchQuery));
@@ -89,17 +89,20 @@ function Movies(props) {
     if (initialShortFilms) {
       setIsShortFilmsOn(JSON.parse(initialShortFilms));
     }
+  }, []);
 
-    if ((initialMovies, initialSearchQuery, initialShortFilms)) {
-      const initFilteredMovies = findMoviesBySearchQuery({
-        movies: JSON.parse(initialMovies),
-        searchQuery: JSON.parse(initialSearchQuery),
-        shortFilms: JSON.parse(initialShortFilms),
-      });
-      setFilteredMovies(initFilteredMovies);
-      setMoviesToShow(initFilteredMovies.slice(0, itemsCount.startValue));
-    }
-  }, [itemsCount.startValue]);
+  useEffect(() => {
+    const filteredMovies = findMoviesBySearchQuery({
+      movies: moviesList,
+      searchQuery: lastSearchQuery,
+      shortFilms: isShortFilmsOn,
+    });
+    setFilteredMovies(filteredMovies);
+  }, [moviesList, lastSearchQuery, isShortFilmsOn]);
+
+  useEffect(() => {
+    setMoviesToShow(filteredMovies.slice(0, itemsCount.startValue));
+  }, [filteredMovies, itemsCount.startValue]);
 
   // показывать кнопку Еще
   useEffect(() => {
@@ -111,8 +114,6 @@ function Movies(props) {
   console.log('MoviesToShow = ', moviesToShow);
 
   function handleChangeSavedMovies(movies) {
-    console.log('handleChangeSavedMovies on movies page: savedMovies = ', savedMovies);
-    console.log('handleChangeSavedMovies on movies page: movies = ', movies);
     setSavedMovies(movies);
   }
 
