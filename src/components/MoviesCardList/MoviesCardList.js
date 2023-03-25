@@ -40,10 +40,14 @@ function MoviesCardList(props) {
 
   const handleMovieSave = (movie) => {
     console.log('handleMovieSave: movie = ', movie);
+    console.log('handleMovieSave: props.savedMovies = ', props.savedMovies);
+
     api
       .saveMovie(movie)
       .then((newMovie) => {
-        props.onChangeSavedMovies((savedMovies) => [...savedMovies, newMovie]);
+        const arr = [props.savedMovies, newMovie];
+        console.log('handleMovieSave: arr = ', arr);
+        props.onChangeSavedMovies(arr);
       })
       .catch((err) => {
         console.log(err);

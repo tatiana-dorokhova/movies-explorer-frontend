@@ -51,6 +51,8 @@ function SavedMovies(props) {
   }, []);
 
   function handleChangeSavedMovies(movies) {
+    console.log('handleChangeSavedMovies on savedMovies page: movies = ', movies);
+
     setSavedMovies(movies);
   }
 
