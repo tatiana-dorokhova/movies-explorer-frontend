@@ -81,13 +81,23 @@ function Movies(props) {
     if (initialMovies) {
       const parsedInitialMovies = JSON.parse(initialMovies);
       setMoviesList(parsedInitialMovies);
-      setMoviesToShow(parsedInitialMovies.slice(0, itemsCount.startValue)); //не работает startValue
+      setMoviesToShow(parsedInitialMovies.slice(0, itemsCount.startValue));
     }
     if (initialSearchQuery) {
       setLastSearchQuery(JSON.parse(initialSearchQuery));
     }
     if (initialShortFilms) {
       setIsShortFilmsOn(JSON.parse(initialShortFilms));
+    }
+
+    if ((initialMovies, initialSearchQuery, initialShortFilms)) {
+      const initFilteredMovies = findMoviesBySearchQuery({
+        movies: JSON.parse(initialMovies),
+        searchQuery: JSON.parse(initialSearchQuery),
+        shortFilms: JSON.parse(initialShortFilms),
+      });
+      setFilteredMovies(initFilteredMovies);
+      setMoviesToShow(initFilteredMovies.slice(0, itemsCount.startValue));
     }
   }, [itemsCount.startValue]);
 
