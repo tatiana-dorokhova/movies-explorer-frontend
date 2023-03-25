@@ -14,12 +14,22 @@ function MoviesCardList(props) {
       ? movie._id
       : props.savedMovies.find((item) => item.id === movie.movieId)._id;
 
+    console.log('handleMovieRemove: idToRemove = ', idToRemove);
+
     api
       .deleteMovie(idToRemove)
       .then(() => {
         if (location.pathname === '/movies') {
+          console.log(
+            'deleting movie: props.savedMovies.filter((item) => item.movieId !== movie.id)',
+            props.savedMovies.filter((item) => item.movieId !== movie.id),
+          );
           props.onChangeSavedMovies(props.savedMovies.filter((item) => item.movieId !== movie.id));
         } else {
+          console.log(
+            'deleting movie in saved: props.movies.filter((item) => item.movieId !== movie.movieId)',
+            props.movies.filter((item) => item.movieId !== movie.movieId),
+          );
           props.onChangeSavedMovies(props.movies.filter((item) => item.movieId !== movie.movieId));
         }
       })
@@ -29,6 +39,7 @@ function MoviesCardList(props) {
   };
 
   const handleMovieSave = (movie) => {
+    console.log('handleMovieSave: movie = ', movie);
     api
       .saveMovie(movie)
       .then((newMovie) => {

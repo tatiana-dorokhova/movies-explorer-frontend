@@ -111,6 +111,7 @@ function Movies(props) {
   console.log('MoviesToShow = ', moviesToShow);
 
   function handleChangeSavedMovies(movies) {
+    console.log('handleChangeSavedMovies: movies = ', movies);
     setSavedMovies(movies);
   }
 

@@ -14,24 +14,36 @@ function SavedMovies(props) {
   const [lastSearchQuery, setLastSearchQuery] = useState('');
   const [isShortFilmsOn, setIsShortFilmsOn] = useState(false);
 
-  useEffect(() => {
-    // при монтировании компонента достать данные из local storage
-    const initialSearchQuery = localStorage.getItem('searchQuery');
-    const initialShortFilms = localStorage.getItem('shortFilms');
-    // если данные есть, записать их в переменные состояния
-    if (initialSearchQuery) {
-      setLastSearchQuery(JSON.parse(initialSearchQuery));
-    }
-    if (initialShortFilms) {
-      setIsShortFilmsOn(JSON.parse(initialShortFilms));
-    }
-  }, []);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
+  // useEffect(() => {
+  //   // при монтировании компонента достать данные из local storage
+  //   const initialSearchQuery = localStorage.getItem('searchQuery');
+  //   const initialShortFilms = localStorage.getItem('shortFilms');
+  //   // если данные есть, записать их в переменные состояния
+  //   if (initialSearchQuery) {
+  //     setLastSearchQuery(JSON.parse(initialSearchQuery));
+  //   }
+  //   if (initialShortFilms) {
+  //     setIsShortFilmsOn(JSON.parse(initialShortFilms));
+  //   }
+  //   if (initialSearchQuery && initialShortFilms) {
+  //     setFilteredMovies(
+  //       findMoviesBySearchQuery({
+  //         movies: savedMovies,
+  //         searchQuery: initialSearchQuery,
+  //         shortFilms: initialShortFilms,
+  //       }),
+  //     );
+  //   }
+  // }, []);
 
   useEffect(() => {
     api
       .getSavedCards()
       .then((savedMovies) => {
         setSavedMovies(savedMovies);
+        setFilteredMovies(savedMovies);
       })
       .catch((err) => {
         console.log(err);
@@ -50,13 +62,20 @@ function SavedMovies(props) {
     // поменять переменные состояния
     setLastSearchQuery(searchQuery);
     setIsShortFilmsOn(shortFilms);
+    setFilteredMovies(
+      findMoviesBySearchQuery({
+        movies: savedMovies,
+        searchQuery: lastSearchQuery,
+        shortFilms: isShortFilmsOn,
+      }),
+    );
   };
 
-  const moviesBySearchQuery = findMoviesBySearchQuery({
-    movies: savedMovies,
-    searchQuery: lastSearchQuery,
-    shortFilms: isShortFilmsOn,
-  });
+  // const moviesBySearchQuery = findMoviesBySearchQuery({
+  //   movies: savedMovies,
+  //   searchQuery: lastSearchQuery,
+  //   shortFilms: isShortFilmsOn,
+  // });
 
   return (
     <>
@@ -65,14 +84,11 @@ function SavedMovies(props) {
         lastSearchQuery={lastSearchQuery}
         isShortFilmsOn={isShortFilmsOn}
       />
-      {moviesBySearchQuery.length !== 0 && (
-        <MoviesCardList
-          movies={moviesBySearchQuery}
-          onChangeSavedMovies={handleChangeSavedMovies}
-        />
+      {filteredMovies.length !== 0 && (
+        <MoviesCardList movies={filteredMovies} onChangeSavedMovies={handleChangeSavedMovies} />
       )}
 
-      {moviesBySearchQuery.length === 0 && lastSearchQuery && (
+      {filteredMovies.length === 0 && lastSearchQuery && (
         <MoviesSearchErrors errorText="Ничего не найдено" />
       )}
     </>
