@@ -45,7 +45,7 @@ function MoviesCardList(props) {
     api
       .saveMovie(movie)
       .then((newMovie) => {
-        const arr = [props.savedMovies, newMovie];
+        const arr = [...props.savedMovies, newMovie];
         console.log('handleMovieSave: arr = ', arr);
         props.onChangeSavedMovies(arr);
       })
