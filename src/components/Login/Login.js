@@ -6,7 +6,6 @@ function Login(props) {
   return (
     <>
       <AuthForm
-        err={props.err}
         inputEmail="login-email"
         inputPassword="login-password"
         title="Рады видеть!"

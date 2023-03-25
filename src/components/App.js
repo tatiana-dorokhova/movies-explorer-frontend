@@ -123,9 +123,9 @@ function App() {
             isLoggedIn={isLoggedIn}
           />
           <Routes>
-            <Route path="/sign-up" element={<Register onAuth={onRegister} err={regError} />} />
+            <Route path="/sign-up" element={<Register onAuth={onRegister} />} />
 
-            <Route path="/sign-in" element={<Login onAuth={onLogin} err={loginError} />} />
+            <Route path="/sign-in" element={<Login onAuth={onLogin} />} />
 
             <Route path="/" element={<Main />} />
 

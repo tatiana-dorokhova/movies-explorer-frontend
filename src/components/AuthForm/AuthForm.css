@@ -14,7 +14,7 @@
   line-height: 29px;
 }
 
-.auth__submit-error {
+/* .auth__submit-error {
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -26,7 +26,7 @@
 }
 .auth__submit-error_visible {
   display: block;
-}
+} */
 
 .auth__submit-button {
   margin: 0;

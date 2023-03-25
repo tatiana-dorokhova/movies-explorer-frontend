@@ -6,7 +6,6 @@ function Register(props) {
   return (
     <>
       <AuthForm
-        err={props.err}
         inputName="register-name"
         inputEmail="register-email"
         inputPassword="register-password"
