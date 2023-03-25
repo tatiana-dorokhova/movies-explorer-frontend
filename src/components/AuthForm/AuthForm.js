@@ -75,6 +75,15 @@ function AuthForm(props) {
           <span className={spanClassName(errors.password)}>{errors.password}</span>
         </label>
 
+        {/* блок сообщения об ошибке */}
+        <span
+          className={
+            props.err ? 'auth__submit-error auth__submit-error_visible' : 'auth__submit-error'
+          }
+        >
+          {props.err}
+        </span>
+
         <button
           className={
             isValid ? 'auth__submit-button' : 'auth__submit-button auth__submit-button_inactive'
