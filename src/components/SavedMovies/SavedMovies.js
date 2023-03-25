@@ -50,6 +50,17 @@ function SavedMovies(props) {
       });
   }, []);
 
+  useEffect(() => {
+    console.log('useEffect for filteredMovies in SavedMovies component');
+    setFilteredMovies(
+      findMoviesBySearchQuery({
+        movies: savedMovies,
+        searchQuery: lastSearchQuery,
+        shortFilms: isShortFilmsOn,
+      }),
+    );
+  }, [savedMovies, lastSearchQuery, isShortFilmsOn]);
+
   function handleChangeSavedMovies(movies) {
     console.log('handleChangeSavedMovies on savedMovies page: movies = ', movies);
 
