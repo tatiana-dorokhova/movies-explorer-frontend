@@ -27,7 +27,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [authError, setAuthError] = useState(null);
+  const [regError, setRegError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
+
   const navigate = useNavigate();
 
   // проверяем по куке, авторизован ли уже пользователь
@@ -51,14 +53,14 @@ function App() {
         // если пришел корректный ответ,
         // перейти на страницу логина
         if (res) {
-          setAuthError(null);
+          setRegError(null);
           onLogin({ email, password });
         }
       })
       // если в ответе ошибка,
       // остаться на странице регистрации
       .catch((err) => {
-        setAuthError(err);
+        setRegError(err);
         console.log(err);
       });
   }
@@ -70,12 +72,12 @@ function App() {
         if (res) {
           setCurrentUser(res);
           setIsLoggedIn(true);
-          setAuthError(null);
+          setLoginError(null);
           navigate('/movies');
         }
       })
       .catch((err) => {
-        setAuthError(err);
+        setLoginError(err);
         console.log(err);
       });
   }
@@ -88,7 +90,8 @@ function App() {
         setCurrentUser({});
         setIsLoggedIn(false);
         localStorage.clear();
-        setAuthError(null);
+        setRegError(null);
+        setLoginError(null);
         navigate('/');
       })
       .catch((err) => {
@@ -120,9 +123,9 @@ function App() {
             isLoggedIn={isLoggedIn}
           />
           <Routes>
-            <Route path="/sign-up" element={<Register onAuth={onRegister} err={authError} />} />
+            <Route path="/sign-up" element={<Register onAuth={onRegister} err={regError} />} />
 
-            <Route path="/sign-in" element={<Login onAuth={onLogin} err={authError} />} />
+            <Route path="/sign-in" element={<Login onAuth={onLogin} err={loginError} />} />
 
             <Route path="/" element={<Main />} />
 

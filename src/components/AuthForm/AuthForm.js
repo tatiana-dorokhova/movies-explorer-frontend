@@ -81,7 +81,7 @@ function AuthForm(props) {
             props.err ? 'auth__submit-error auth__submit-error_visible' : 'auth__submit-error'
           }
         >
-          {props.err}
+          {props.err ? `${props.err.name}: ${props.err.message}` : ''}
         </span>
 
         <button
