@@ -58,7 +58,7 @@ function App() {
       // если в ответе ошибка,
       // остаться на странице регистрации
       .catch((err) => {
-        setAuthError(err.message);
+        setAuthError(err);
         console.log(err);
       });
   }
@@ -70,10 +70,12 @@ function App() {
         if (res) {
           setCurrentUser(res);
           setIsLoggedIn(true);
+          setAuthError(null);
           navigate('/movies');
         }
       })
       .catch((err) => {
+        setAuthError(err);
         console.log(err);
       });
   }
