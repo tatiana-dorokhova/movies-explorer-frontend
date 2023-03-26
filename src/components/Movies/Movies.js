@@ -13,12 +13,7 @@ import { getAllMovies } from '../../utils/MoviesApi';
 import { api } from '../../utils/MainApi';
 import { findMoviesBySearchQuery } from '../../utils/MoviesHandler';
 
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-
 function Movies(props) {
-  const currentUser = useContext(CurrentUserContext);
-  console.log('currentUser on mount component movies = ', currentUser);
-
   // все фильмы, полученные с сервера
   const [moviesList, setMoviesList] = useState([]);
   const [lastSearchQuery, setLastSearchQuery] = useState('');
@@ -112,10 +107,6 @@ function Movies(props) {
   useEffect(() => {
     if (filteredMovies.length >= 3) setIsShowMoreButtonVisible(true);
   }, [filteredMovies]);
-
-  // console.log('MoviesList = ', moviesList);
-
-  // console.log('MoviesToShow = ', moviesToShow);
 
   function handleChangeSavedMovies(movies) {
     setSavedMovies(movies);

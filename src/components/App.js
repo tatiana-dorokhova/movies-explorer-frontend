@@ -31,7 +31,6 @@ function App() {
 
   // проверяем по куке, авторизован ли уже пользователь
   useEffect(() => {
-    setIsLoading(true);
     api
       .getUser()
       .then((userProfile) => {
@@ -98,8 +97,6 @@ function App() {
         console.log(err);
       });
   }
-
-  console.log('currentUser = ', currentUser);
 
   return (
     <>
