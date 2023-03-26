@@ -19,7 +19,6 @@ import PageNotFound from './PageNotFound/PageNotFound';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-// import { initialCurrentUser } from '../utils/initialMovies';
 import { api } from '../utils/MainApi';
 import Preloader from './Preloader/Preloader';
 
@@ -43,7 +42,7 @@ function App() {
         setIsLoading(false);
         console.log(err);
       });
-  }, []);
+  }, [currentUser]);
 
   function onRegister({ name, email, password }) {
     api
@@ -125,7 +124,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute currentUser={currentUser}>
                     <Profile
                       onEditProfile={onEditProfile}
                       title={`Привет, ${currentUser.name}!`}
@@ -141,7 +140,7 @@ function App() {
               <Route
                 path="/movies"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute currentUser={currentUser}>
                     <Movies />
                   </ProtectedRoute>
                 }
@@ -150,7 +149,7 @@ function App() {
               <Route
                 path="/saved-movies"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute currentUser={currentUser}>
                     <SavedMovies />
                   </ProtectedRoute>
                 }

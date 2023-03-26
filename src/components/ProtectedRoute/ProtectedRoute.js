@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 // этот компонент принимает другой компонент в качестве пропса
 // он также может взять неограниченное число пропсов и передать их новому компоненту
-const ProtectedRoute = ({ children }) => {
-  const currentUser = useContext(CurrentUserContext);
+const ProtectedRoute = ({ currentUser, children }) => {
+  // const currentUser = useContext(CurrentUserContext);
 
   if (!currentUser._id) {
     return <Navigate to="/" replace />;
