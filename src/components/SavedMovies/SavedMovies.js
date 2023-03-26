@@ -59,12 +59,6 @@ function SavedMovies(props) {
     );
   };
 
-  // const moviesBySearchQuery = findMoviesBySearchQuery({
-  //   movies: savedMovies,
-  //   searchQuery: lastSearchQuery,
-  //   shortFilms: isShortFilmsOn,
-  // });
-
   return (
     <>
       <SearchForm

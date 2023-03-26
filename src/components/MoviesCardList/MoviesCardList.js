@@ -12,7 +12,7 @@ function MoviesCardList(props) {
     // и отправить запрос на удаление с _id из сохраненной карточки
     const idToRemove = movie.movieId
       ? movie._id
-      : props.savedMovies.find((item) => item.id === movie.movieId)._id;
+      : props.savedMovies.find((item) => item.movieId === movie.id)._id;
 
     api
       .deleteMovie(idToRemove)
