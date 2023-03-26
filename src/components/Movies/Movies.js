@@ -1,7 +1,7 @@
 // компонент со ссылками на другие проекты
 import './Movies.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -13,7 +13,12 @@ import { getAllMovies } from '../../utils/MoviesApi';
 import { api } from '../../utils/MainApi';
 import { findMoviesBySearchQuery } from '../../utils/MoviesHandler';
 
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 function Movies(props) {
+  const currentUser = useContext(CurrentUserContext);
+  console.log('currentUser on mount component movies = ', currentUser);
+
   // все фильмы, полученные с сервера
   const [moviesList, setMoviesList] = useState([]);
   const [lastSearchQuery, setLastSearchQuery] = useState('');
@@ -73,7 +78,6 @@ function Movies(props) {
   }, []);
 
   useEffect(() => {
-    console.log('mount component movies');
     // при монтировании компонента достать данные из local storage
     const initialMovies = localStorage.getItem('movies');
     const initialSearchQuery = localStorage.getItem('searchQuery');

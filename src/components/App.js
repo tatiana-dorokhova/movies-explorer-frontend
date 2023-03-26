@@ -25,7 +25,7 @@ import Preloader from './Preloader/Preloader';
 function App() {
   // состояния пользователя
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -124,7 +124,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute currentUser={currentUser}>
+                  <ProtectedRoute>
                     <Profile
                       onEditProfile={onEditProfile}
                       title={`Привет, ${currentUser.name}!`}
@@ -140,7 +140,7 @@ function App() {
               <Route
                 path="/movies"
                 element={
-                  <ProtectedRoute currentUser={currentUser}>
+                  <ProtectedRoute>
                     <Movies />
                   </ProtectedRoute>
                 }
@@ -149,7 +149,7 @@ function App() {
               <Route
                 path="/saved-movies"
                 element={
-                  <ProtectedRoute currentUser={currentUser}>
+                  <ProtectedRoute>
                     <SavedMovies />
                   </ProtectedRoute>
                 }
