@@ -43,7 +43,7 @@ function App() {
         setIsLoading(false);
         console.log(err);
       });
-  }, [navigate]);
+  }, []);
 
   function onRegister({ name, email, password }) {
     api
@@ -81,9 +81,8 @@ function App() {
     api
       .signout()
       .then(() => {
-        setCurrentUser({});
         localStorage.clear();
-        navigate('/');
+        setCurrentUser({});
       })
       .catch((err) => {
         console.log(err);
