@@ -3,25 +3,27 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
-
-// в зависимости от того, залогинен пользователь или нет, показываем (на 1280px):
-
-// не залогинен:
-// показываем логотип, кнопки Регистрация и Войти
-
-// нажата кнопка Регистрация / Войти:
-// лого, надпись Добро пожаловать! или Рады видеть!, форма регистрации или логина
-
-// залогинен (в том числе страница изменения профиля)
-// лого, ссылки Фильмы и Сохраненные фильмы, кнопка Аккаунт
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useContext } from 'react';
 
 function Header(props) {
+  const currentUser = useContext(CurrentUserContext);
+
   const location = useLocation();
-  const isUserLoggedIn = props.isLoggedIn;
+
+  const activeNavLink = ({ isActive }) =>
+    isActive
+      ? 'header__link header__link_films header__link_active'
+      : 'header__link header__link_films';
+
+  const activeMobileNavLink = ({ isActive }) =>
+    isActive
+      ? 'header__link header__link_mobile header__link_mobile-active'
+      : 'header__link header__link_mobile';
 
   return (
     <header className="header">
-      {location.pathname === '/' && !isUserLoggedIn && (
+      {location.pathname === '/' && !currentUser._id && (
         <>
           <div className="header__main-container">
             <HeaderLogo logoSrc={props.logoSrc} logoAlt={props.logoAlt} />
@@ -52,7 +54,7 @@ function Header(props) {
         location.pathname === '/movies' ||
         location.pathname === '/saved-movies' ||
         location.pathname === '/profile') &&
-        isUserLoggedIn && (
+        currentUser._id && (
           <>
             <div className="header__main-container">
               <HeaderLogo logoSrc={props.logoSrc} logoAlt={props.logoAlt} />
@@ -73,42 +75,23 @@ function Header(props) {
               <nav className="header__mobile-menu">
                 <ul className="header__mobile-menu-list">
                   <li className="header__mobile-menu-item">
-                    <NavLink
-                      to="/"
-                      className={({ isActive }) =>
-                        isActive
-                          ? 'header__link header__link_mobile header__link_mobile-active'
-                          : 'header__link header__link_mobile'
-                      }
-                    >
+                    <NavLink to="/" className={activeMobileNavLink}>
                       Главная
                     </NavLink>
                   </li>
+
                   <li className="header__mobile-menu-item">
-                    <NavLink
-                      to="/movies"
-                      className={({ isActive }) =>
-                        isActive
-                          ? 'header__link header__link_mobile header__link_mobile-active'
-                          : 'header__link header__link_mobile'
-                      }
-                    >
+                    <NavLink to="/movies" className={activeMobileNavLink}>
                       Фильмы
                     </NavLink>
                   </li>
 
                   <li className="header__mobile-menu-item">
-                    <NavLink
-                      to="/saved-movies"
-                      className={({ isActive }) =>
-                        isActive
-                          ? 'header__link header__link_mobile header__link_mobile-active'
-                          : 'header__link header__link_mobile'
-                      }
-                    >
+                    <NavLink to="/saved-movies" className={activeMobileNavLink}>
                       Сохранённые&nbsp;фильмы
                     </NavLink>
                   </li>
+
                   <li className="header__mobile-menu-item header__mobile-menu-item_account">
                     <Link
                       to="/profile"
@@ -122,24 +105,10 @@ function Header(props) {
 
               {/* изначально видимый блок навигации в шапке на больших разрешениях экрана */}
               <div className="header__links-block">
-                <NavLink
-                  to="/movies"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'header__link header__link_films header__link_active'
-                      : 'header__link header__link_films'
-                  }
-                >
+                <NavLink to="/movies" className={activeNavLink}>
                   Фильмы
                 </NavLink>
-                <NavLink
-                  to="/saved-movies"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'header__link header__link_films header__link_active'
-                      : 'header__link header__link_films'
-                  }
-                >
+                <NavLink to="/saved-movies" className={activeNavLink}>
                   Сохранённые&nbsp;фильмы
                 </NavLink>
               </div>

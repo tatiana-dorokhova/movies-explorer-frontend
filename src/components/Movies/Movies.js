@@ -109,9 +109,9 @@ function Movies(props) {
     if (filteredMovies.length >= 3) setIsShowMoreButtonVisible(true);
   }, [filteredMovies]);
 
-  console.log('MoviesList = ', moviesList);
+  // console.log('MoviesList = ', moviesList);
 
-  console.log('MoviesToShow = ', moviesToShow);
+  // console.log('MoviesToShow = ', moviesToShow);
 
   function handleChangeSavedMovies(movies) {
     setSavedMovies(movies);

@@ -21,30 +21,31 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 // import { initialCurrentUser } from '../utils/initialMovies';
 import { api } from '../utils/MainApi';
+import Preloader from './Preloader/Preloader';
 
 function App() {
   // состояния пользователя
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [regError, setRegError] = useState(null);
-  const [loginError, setLoginError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   // проверяем по куке, авторизован ли уже пользователь
   useEffect(() => {
+    setIsLoading(true);
     api
       .getUser()
       .then((userProfile) => {
-        setIsLoggedIn(true);
+        console.log('получили успешный ответ от сервера = ', userProfile);
         setCurrentUser(userProfile);
+        setIsLoading(false);
         navigate('/movies');
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
-  }, []);
+  }, [navigate]);
 
   function onRegister({ name, email, password }) {
     api
@@ -53,14 +54,12 @@ function App() {
         // если пришел корректный ответ,
         // перейти на страницу логина
         if (res) {
-          setRegError(null);
           onLogin({ email, password });
         }
       })
       // если в ответе ошибка,
       // остаться на странице регистрации
       .catch((err) => {
-        setRegError(err);
         console.log(err);
       });
   }
@@ -71,13 +70,10 @@ function App() {
       .then((res) => {
         if (res) {
           setCurrentUser(res);
-          setIsLoggedIn(true);
-          setLoginError(null);
           navigate('/movies');
         }
       })
       .catch((err) => {
-        setLoginError(err);
         console.log(err);
       });
   }
@@ -88,10 +84,7 @@ function App() {
       .signout()
       .then(() => {
         setCurrentUser({});
-        setIsLoggedIn(false);
         localStorage.clear();
-        setRegError(null);
-        setLoginError(null);
         navigate('/');
       })
       .catch((err) => {
@@ -104,12 +97,13 @@ function App() {
       .editUser({ name, email })
       .then((editedProfile) => {
         setCurrentUser(editedProfile);
-        setIsLoggedIn(true);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+  console.log('currentUser = ', currentUser);
 
   return (
     <>
@@ -120,51 +114,54 @@ function App() {
             logoAlt="О проекте"
             closeButtonSrc={burgerCloseButtonImage}
             closeButtonAlt="Закрыть меню"
-            isLoggedIn={isLoggedIn}
           />
-          <Routes>
-            <Route path="/sign-up" element={<Register onAuth={onRegister} />} />
+          {isLoading ? (
+            <Preloader />
+          ) : (
+            <Routes>
+              <Route path="/sign-up" element={<Register onAuth={onRegister} />} />
 
-            <Route path="/sign-in" element={<Login onAuth={onLogin} />} />
+              <Route path="/sign-in" element={<Login onAuth={onLogin} />} />
 
-            <Route path="/" element={<Main />} />
+              <Route path="/" element={<Main />} />
 
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Profile
-                    onEditProfile={onEditProfile}
-                    title={`Привет, ${currentUser.name}!`}
-                    formName="profile"
-                    submitButtonName="Редактировать"
-                    profileSignoutButtonText="Выйти из аккаунта"
-                    onSignOut={onSignOut}
-                  />
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile
+                      onEditProfile={onEditProfile}
+                      title={`Привет, ${currentUser.name}!`}
+                      formName="profile"
+                      submitButtonName="Редактировать"
+                      profileSignoutButtonText="Выйти из аккаунта"
+                      onSignOut={onSignOut}
+                    />
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route
-              path="/movies"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Movies />
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/movies"
+                element={
+                  <ProtectedRoute>
+                    <Movies />
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route
-              path="/saved-movies"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <SavedMovies />
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/saved-movies"
+                element={
+                  <ProtectedRoute>
+                    <SavedMovies />
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          )}
           <Footer />
         </div>
       </CurrentUserContext.Provider>
