@@ -36,10 +36,8 @@ function App() {
     api
       .getUser()
       .then((userProfile) => {
-        console.log('получили успешный ответ от сервера = ', userProfile);
         setCurrentUser(userProfile);
         setIsLoading(false);
-        navigate('/movies');
       })
       .catch((err) => {
         setIsLoading(false);

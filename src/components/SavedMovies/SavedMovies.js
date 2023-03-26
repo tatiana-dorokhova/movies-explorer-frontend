@@ -16,28 +16,6 @@ function SavedMovies(props) {
 
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  // useEffect(() => {
-  //   // при монтировании компонента достать данные из local storage
-  //   const initialSearchQuery = localStorage.getItem('searchQuery');
-  //   const initialShortFilms = localStorage.getItem('shortFilms');
-  //   // если данные есть, записать их в переменные состояния
-  //   if (initialSearchQuery) {
-  //     setLastSearchQuery(JSON.parse(initialSearchQuery));
-  //   }
-  //   if (initialShortFilms) {
-  //     setIsShortFilmsOn(JSON.parse(initialShortFilms));
-  //   }
-  //   if (initialSearchQuery && initialShortFilms) {
-  //     setFilteredMovies(
-  //       findMoviesBySearchQuery({
-  //         movies: savedMovies,
-  //         searchQuery: initialSearchQuery,
-  //         shortFilms: initialShortFilms,
-  //       }),
-  //     );
-  //   }
-  // }, []);
-
   useEffect(() => {
     api
       .getSavedCards()
@@ -51,7 +29,6 @@ function SavedMovies(props) {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect for filteredMovies in SavedMovies component');
     setFilteredMovies(
       findMoviesBySearchQuery({
         movies: savedMovies,
@@ -62,8 +39,6 @@ function SavedMovies(props) {
   }, [savedMovies, lastSearchQuery, isShortFilmsOn]);
 
   function handleChangeSavedMovies(movies) {
-    console.log('handleChangeSavedMovies on savedMovies page: movies = ', movies);
-
     setSavedMovies(movies);
   }
 
