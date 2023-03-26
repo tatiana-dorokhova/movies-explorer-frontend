@@ -42,7 +42,7 @@ function App() {
         setIsLoading(false);
         console.log(err);
       });
-  }, [currentUser]);
+  }, []);
 
   function onRegister({ name, email, password }) {
     api
