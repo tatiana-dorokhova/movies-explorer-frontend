@@ -1,4 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+// используем тот же валидатор, что и на бэке
+import { isEmail } from 'validator';
 
 //хук управления формой и валидации формы
 export function useFormWithValidation(defaultValues) {
@@ -14,18 +16,18 @@ export function useFormWithValidation(defaultValues) {
     const name = target.name;
     const value = target.value;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest('form').checkValidity());
+    // если изменилось поле email, то если оно не соответствует шаблону, дизейблить форму
+    if (name === 'email' && !isEmail(value)) {
+      console.log('name = ', name, 'isEmail(value) = ', isEmail(value));
+      setErrors({ ...errors, email: 'email format is incorrect' });
+      setIsValid(false);
+    } else {
+      console.log('name = ', name, 'isEmail(value) = ', isEmail(value));
+
+      setErrors({ ...errors, [name]: target.validationMessage });
+      setIsValid(target.closest('form').checkValidity());
+    }
   };
 
-  const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
-      setIsValid(newIsValid);
-    },
-    [setValues, setErrors, setIsValid],
-  );
-
-  return { values, handleChange, errors, isValid, resetForm };
+  return { values, handleChange, errors, isValid };
 }

@@ -42,7 +42,7 @@ function AuthForm(props) {
               name="name"
               value={values.name ?? ''}
               onChange={handleChange}
-              pattern='[А-Яа-яЁёa-zA-Z\s-]{2,30}'
+              pattern="[А-Яа-яЁёa-zA-Z\s-]{2,30}"
               required
             />
             <span className={spanClassName(errors.name)}>{errors.name}</span>
@@ -53,7 +53,7 @@ function AuthForm(props) {
           E-mail
           <input
             className={errors.email ? 'auth__input auth__input-error_red-color' : 'auth__input'}
-            type="email"
+            type="text"
             name="email"
             value={values.email ?? ''}
             onChange={handleChange}
