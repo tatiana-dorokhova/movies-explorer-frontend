@@ -35,7 +35,6 @@ function Movies(props) {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
   // состояние для отображения нужного количества карточек
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [itemsCount, setItemsCount] = useState({ startValue: 0, addItemsCount: 0 });
 
   const [isShowMoreButtonVisible, setIsShowMoreButtonVisible] = useState(true);
@@ -57,8 +56,10 @@ function Movies(props) {
       } else {
         setItemsCount({ startValue: START_VALUE_MOBILE, addItemsCount: ITEMS_TO_ADD_MOBILE });
       }
-      setWindowWidth(window.innerWidth);
     };
+
+    // вызвать функцию
+    resizeWidthCount();
 
     // повесить листнер на изменение ширины экрана
     window.addEventListener('resize', resizeWidthCount);
@@ -66,7 +67,7 @@ function Movies(props) {
     return () => {
       window.removeEventListener('resize', resizeWidthCount());
     };
-  }, [windowWidth]);
+  }, []);
 
   // для правильной отрисовки иконки сохраненного фильма в роуте /movies
   // достать список сохраненных фильмов из MainApi, чтобы отрисовываться по movie.id
@@ -114,10 +115,10 @@ function Movies(props) {
 
   // показывать кнопку Еще
   useEffect(() => {
-    if (filteredMovies.length >= 3) {
+    if (filteredMovies.length >= itemsCount.startValue) {
       setIsShowMoreButtonVisible(true);
     } else setIsShowMoreButtonVisible(false);
-  }, [filteredMovies]);
+  }, [filteredMovies, itemsCount.startValue]);
 
   function handleChangeSavedMovies(movies) {
     setSavedMovies(movies);
@@ -160,9 +161,9 @@ function Movies(props) {
       shortFilms: shortFilms,
     });
 
-    if (moviesBySearchQuery.length >= 3) {
-      setIsShowMoreButtonVisible(true);
-    } else setIsShowMoreButtonVisible(false);
+    // if (moviesBySearchQuery.length >= 3) {
+    //   setIsShowMoreButtonVisible(true);
+    // } else setIsShowMoreButtonVisible(false);
 
     setFilteredMovies(moviesBySearchQuery);
     setMoviesToShow(moviesBySearchQuery.slice(0, itemsCount.startValue));
