@@ -12,6 +12,13 @@ import LoadButton from '../LoadButton/LoadButton';
 import { getAllMovies } from '../../utils/MoviesApi';
 import { api } from '../../utils/MainApi';
 import { findMoviesBySearchQuery } from '../../utils/MoviesHandler';
+import {
+  START_VALUE_FULL_DISPLAY,
+  ITEMS_TO_ADD_FULL_DISPLAY,
+  START_VALUE_TABLET,
+  START_VALUE_MOBILE,
+  ITEMS_TO_ADD_MOBILE,
+} from '../../utils/constants';
 
 function Movies(props) {
   // все фильмы, полученные с сервера
@@ -39,20 +46,22 @@ function Movies(props) {
 
   useEffect(() => {
     // вычислить текущую ширину экрана и установить состояния в зависимости от нее
-    function resizeWidthCount() {
+    const resizeWidthCount = () => {
       if (window.innerWidth >= 1280) {
-        setItemsCount({ startValue: 12, addItemsCount: 3 });
+        setItemsCount({
+          startValue: START_VALUE_FULL_DISPLAY,
+          addItemsCount: ITEMS_TO_ADD_FULL_DISPLAY,
+        });
       } else if (window.innerWidth >= 636) {
-        setItemsCount({ startValue: 8, addItemsCount: 2 });
+        setItemsCount({ startValue: START_VALUE_TABLET, addItemsCount: ITEMS_TO_ADD_MOBILE });
       } else {
-        setItemsCount({ startValue: 5, addItemsCount: 2 });
+        setItemsCount({ startValue: START_VALUE_MOBILE, addItemsCount: ITEMS_TO_ADD_MOBILE });
       }
-    }
-
-    setWindowWidth(window.innerWidth);
+      setWindowWidth(window.innerWidth);
+    };
 
     // повесить листнер на изменение ширины экрана
-    window.addEventListener('resize', resizeWidthCount());
+    window.addEventListener('resize', resizeWidthCount);
     // удалить листнер при размонтировании
     return () => {
       window.removeEventListener('resize', resizeWidthCount());
@@ -105,8 +114,10 @@ function Movies(props) {
 
   // показывать кнопку Еще
   useEffect(() => {
-    if (filteredMovies.length >= 3) setIsShowMoreButtonVisible(true);
-  }, [filteredMovies]);
+    if (filteredMovies.length >= itemsCount.startValue) {
+      setIsShowMoreButtonVisible(true);
+    } else setIsShowMoreButtonVisible(false);
+  }, [filteredMovies, itemsCount.startValue]);
 
   function handleChangeSavedMovies(movies) {
     setSavedMovies(movies);

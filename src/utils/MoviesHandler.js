@@ -1,3 +1,5 @@
+import { SHORT_MOVIE_DURATION } from './constants';
+
 // регистронезависимый поиск фильмов по заданному фильтру
 export const findMoviesBySearchQuery = ({ movies, searchQuery, shortFilms }) => {
   // найдем все фильмы по searchQuery
@@ -8,7 +10,7 @@ export const findMoviesBySearchQuery = ({ movies, searchQuery, shortFilms }) => 
   );
   // отфильтруем их, если нужно, по shortFilms
   if (shortFilms) {
-    return allMovies.filter((film) => film.duration <= 40);
+    return allMovies.filter((film) => film.duration <= SHORT_MOVIE_DURATION);
   }
   return allMovies;
 };
