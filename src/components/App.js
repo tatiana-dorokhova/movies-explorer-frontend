@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
 // импорт изображений
@@ -112,9 +112,25 @@ function App() {
             <Preloader />
           ) : (
             <Routes>
-              <Route path="/sign-up" element={<Register onAuth={onRegister} />} />
+              <Route
+                path="/sign-up"
+                // если пользователь авторизован, отправлять его на страницу фильмов
+                element={
+                  !currentUser._id ? (
+                    <Register onAuth={onRegister} />
+                  ) : (
+                    <Navigate to="/movies" replace />
+                  )
+                }
+              />
 
-              <Route path="/sign-in" element={<Login onAuth={onLogin} />} />
+              <Route
+                path="/sign-in"
+                // если пользователь авторизован, отправлять его на страницу фильмов
+                element={
+                  !currentUser._id ? <Login onAuth={onLogin} /> : <Navigate to="/movies" replace />
+                }
+              />
 
               <Route path="/" element={<Main />} />
 
