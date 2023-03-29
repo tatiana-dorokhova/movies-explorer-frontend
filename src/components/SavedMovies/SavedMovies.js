@@ -42,19 +42,13 @@ function SavedMovies(props) {
     setSavedMovies(movies);
   }
 
+  // при поиске не меняем состояние переменных в local storage
   const handleSearch = ({ searchQuery, shortFilms }) => {
-    // записать в localStorage фильтр и значение свитчера
-    localStorage.setItem('searchQuery', JSON.stringify(searchQuery));
-    localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
-
-    // поменять переменные состояния
-    setLastSearchQuery(searchQuery);
-    setIsShortFilmsOn(shortFilms);
     setFilteredMovies(
       findMoviesBySearchQuery({
         movies: savedMovies,
-        searchQuery: lastSearchQuery,
-        shortFilms: isShortFilmsOn,
+        searchQuery: searchQuery,
+        shortFilms: shortFilms,
       }),
     );
   };

@@ -41,6 +41,7 @@ function Profile(props) {
               name="name"
               value={values.name ?? ''}
               onChange={handleChange}
+              pattern='[А-Яа-яЁёa-zA-Z\s-]{2,30}'
               required
             />
             <span
@@ -77,7 +78,15 @@ function Profile(props) {
 
           <button
             className="profile__submit-button"
-            disabled={isValid ? false : true}
+            // кнопка неактивна, когда:
+            // любое поле формы невалидно
+            // или введенные данные равны текущим данным пользователя
+            disabled={
+              (values['name'] === currentUser.name && values['email'] === currentUser.email) ||
+              !isValid
+                ? true
+                : false
+            }
             type="submit"
           >
             {props.submitButtonName}

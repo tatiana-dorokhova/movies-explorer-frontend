@@ -42,7 +42,7 @@ function AuthForm(props) {
               name="name"
               value={values.name ?? ''}
               onChange={handleChange}
-              pattern="^[А-Яа-яЁёa-zA-Z\s\-]+$"
+              pattern='[А-Яа-яЁёa-zA-Z\s-]{2,30}'
               required
             />
             <span className={spanClassName(errors.name)}>{errors.name}</span>
