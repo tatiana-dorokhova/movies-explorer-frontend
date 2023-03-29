@@ -5,6 +5,8 @@ import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 // импорт изображений
 import headerLogoImage from '../images/header/header-logo.svg';
 import burgerCloseButtonImage from '../images/header/header-burger-close-button.svg';
+import okImage from '../images/common/InfoTooltip-Ok.svg';
+import failImage from '../images/common/InfoTooltip-Fail.svg';
 
 // импорт компонентов
 import Header from './Header/Header';
@@ -16,6 +18,7 @@ import Register from './Register/Register';
 import Login from './Login/Login';
 import Profile from './Profile/Profile';
 import PageNotFound from './PageNotFound/PageNotFound';
+import InfoTooltip from './InfoTooltip/InfoTooltip';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -26,6 +29,8 @@ function App() {
   // состояния пользователя
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isActionSuccess, setIsActionSuccess] = useState(true);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -92,10 +97,18 @@ function App() {
       .editUser({ name, email })
       .then((editedProfile) => {
         setCurrentUser(editedProfile);
+        setIsActionSuccess(true);
+        setIsInfoTooltipOpen(true);
       })
       .catch((err) => {
+        setIsActionSuccess(false);
+        setIsInfoTooltipOpen(true);
         console.log(err);
       });
+  }
+
+  function closeTooltip() {
+    setIsInfoTooltipOpen(false);
   }
 
   return (
@@ -172,6 +185,16 @@ function App() {
             </Routes>
           )}
           <Footer />
+
+          <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            onClose={closeTooltip}
+            isActionSuccess={isActionSuccess}
+            okImage={okImage}
+            failImage={failImage}
+            successMessage="Изменения успешно сохранены"
+            failMessage="На сервере произошла ошибка"
+          ></InfoTooltip>
         </div>
       </CurrentUserContext.Provider>
     </>
