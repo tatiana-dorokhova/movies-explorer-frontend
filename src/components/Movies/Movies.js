@@ -114,10 +114,10 @@ function Movies(props) {
 
   // показывать кнопку Еще
   useEffect(() => {
-    if (filteredMovies.length >= itemsCount.startValue) {
+    if (filteredMovies.length >= 3) {
       setIsShowMoreButtonVisible(true);
     } else setIsShowMoreButtonVisible(false);
-  }, [filteredMovies, itemsCount.startValue]);
+  }, [filteredMovies]);
 
   function handleChangeSavedMovies(movies) {
     setSavedMovies(movies);
