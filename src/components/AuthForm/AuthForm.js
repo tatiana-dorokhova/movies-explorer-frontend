@@ -2,40 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './AuthForm.css';
+import { useFormWithValidation } from '../../utils/UseFormHook';
 
 function AuthForm(props) {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const [isNameValid, setIsNameValid] = React.useState(true);
-  const [isEmailValid, setIsEmailValid] = React.useState(true);
-  const [isPasswordValid, setIsPasswordValid] = React.useState(true);
-
-  function handleChange(event) {
-    const { name, value, validity } = event.target;
-    if (name === 'name') {
-      setName(value);
-      validity.valid ? setIsNameValid(true) : setIsNameValid(false);
-    }
-    if (name === 'email') {
-      setEmail(value);
-      console.log('email = ', email);
-      validity.valid ? setIsEmailValid(true) : setIsEmailValid(false);
-    }
-    if (name === 'password') {
-      setPassword(value);
-      validity.valid ? setIsPasswordValid(true) : setIsPasswordValid(false);
-    }
-  }
+  const { values, handleChange, errors, isValid } = useFormWithValidation({});
 
   function handleSubmit(e) {
     e.preventDefault();
     props.onAuth({
-      name,
-      email,
-      password,
+      name: values.name,
+      email: values.email,
+      password: values.password,
     });
+  }
+
+  function spanClassName(checkingCondition) {
+    return checkingCondition
+      ? 'auth__input-error auth__input-error_visible auth__input-error_red-color'
+      : 'auth__input-error';
   }
 
   return (
@@ -53,80 +37,60 @@ function AuthForm(props) {
           <label className="auth__label" htmlFor={props.inputName}>
             Имя
             <input
-              className={
-                isNameValid
-                  ? 'auth__input'
-                  : 'auth__input auth__input-error_red-color'
-              }
+              className={errors.name ? 'auth__input auth__input-error_red-color' : 'auth__input'}
               type="text"
               name="name"
-              value={name ?? ''}
+              value={values.name ?? ''}
               onChange={handleChange}
+              pattern="[А-Яа-яЁёa-zA-Z\s-]{2,30}"
               required
             />
-            <span
-              className={
-                isNameValid
-                  ? 'auth__input-error'
-                  : 'auth__input-error auth__input-error_visible auth__input-error_red-color'
-              }
-            >
-              Что-то пошло не так...
-            </span>
+            <span className={spanClassName(errors.name)}>{errors.name}</span>
           </label>
         )}
 
         <label className="auth__label" htmlFor={props.inputEmail}>
           E-mail
           <input
-            className={
-              isEmailValid
-                ? 'auth__input'
-                : 'auth__input auth__input-error_red-color'
-            }
-            type="email"
+            className={errors.email ? 'auth__input auth__input-error_red-color' : 'auth__input'}
+            type="text"
             name="email"
-            value={email ?? ''}
+            value={values.email ?? ''}
             onChange={handleChange}
             required
           />
-          <span
-            className={
-              isEmailValid
-                ? 'auth__input-error'
-                : 'auth__input-error auth__input-error_visible auth__input-error_red-color'
-            }
-          >
-            Что-то пошло не так...
-          </span>
+          <span className={spanClassName(errors.email)}>{errors.email}</span>
         </label>
 
         <label className="auth__label" htmlFor={props.inputPassword}>
           Пароль
           <input
-            className={
-              isPasswordValid
-                ? 'auth__input'
-                : 'auth__input auth__input-error_red-color'
-            }
+            className={errors.password ? 'auth__input auth__input-error_red-color' : 'auth__input'}
             type="password"
             name="password"
-            value={password ?? ''}
+            value={values.password ?? ''}
             onChange={handleChange}
             required
           />
-          <span
-            className={
-              isPasswordValid
-                ? 'auth__input-error'
-                : 'auth__input-error auth__input-error_visible auth__input-error_red-color'
-            }
-          >
-            Что-то пошло не так...
-          </span>
+          <span className={spanClassName(errors.password)}>{errors.password}</span>
         </label>
 
-        <button className="auth__submit-button" type="submit">
+        {/* блок сообщения об ошибке */}
+        {/* <span
+          className={
+            props.err ? 'auth__submit-error auth__submit-error_visible' : 'auth__submit-error'
+          }
+        >
+          {props.err ? `${props.err.name}: ${props.err.message}` : ''}
+        </span> */}
+
+        <button
+          className={
+            isValid ? 'auth__submit-button' : 'auth__submit-button auth__submit-button_inactive'
+          }
+          disabled={isValid ? false : true}
+          type="submit"
+        >
           {props.submitButtonName}
         </button>
       </form>

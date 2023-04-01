@@ -1,0 +1,42 @@
+.movies-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 2 * 70px);
+  height: 100px;
+  z-index: 10;
+  padding: 20px;
+}
+
+.movies-not-found__text {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  color: #ff4062;
+  text-align: center;
+}
+
+@media screen and (max-width: 892px) {
+  .movies-not-found {
+    width: calc(100% - 2 * 30px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movies-not-found__text {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movies-not-found {
+    width: calc(100% - 2 * 10px);
+  }
+
+  .movies-not-found__text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

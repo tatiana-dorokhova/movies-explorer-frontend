@@ -26,8 +26,7 @@
 }
 
 .load-button_hidden {
-  margin: 50px auto 54px;
-  visibility: hidden;
+  display: none;
 }
 
 @media screen and (max-width: 635px) {

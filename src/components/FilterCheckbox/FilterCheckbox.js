@@ -15,7 +15,6 @@ const FilterCheckbox = (props) => {
         type="checkbox"
       />
       <label className="filter-checkbox__label" htmlFor={`switch-short-film`}>
-        {' '}
         <span
           style={{ background: props.isOn && '#2be080' }}
           className={`filter-checkbox__button`}

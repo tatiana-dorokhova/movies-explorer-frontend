@@ -1,25 +1,24 @@
 // компонент страницы изменения профиля
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Profile.css';
 
-function Profile(props) {
-  const [values, setValues] = React.useState({});
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../utils/UseFormHook';
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
+function Profile(props) {
+  const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid } = useFormWithValidation({
+    name: currentUser.name,
+    email: currentUser.email,
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onAuth({
-      name: values[props.inputName],
-      email: values[props.inputEmail],
+    props.onEditProfile({
+      name: values.name,
+      email: values.email,
     });
   }
 
@@ -39,11 +38,21 @@ function Profile(props) {
             <input
               className="profile__input"
               type="text"
-              name={props.inputName}
-              value={values[props.inputName] ?? ''}
+              name="name"
+              value={values.name ?? ''}
               onChange={handleChange}
+              pattern='[А-Яа-яЁёa-zA-Z\s-]{2,30}'
               required
             />
+            <span
+              className={
+                errors.name
+                  ? 'profile__input-error profile__input-error_visible profile__input-error_above'
+                  : 'profile__input-error'
+              }
+            >
+              {errors.name && 'Поле не заполнено или неверный формат имени'}
+            </span>
           </label>
 
           <label className="profile__label">
@@ -51,19 +60,40 @@ function Profile(props) {
             <input
               className="profile__input"
               type="email"
-              name={props.inputEmail}
-              value={values[props.inputEmail] ?? ''}
+              name="email"
+              value={values.email ?? ''}
               onChange={handleChange}
               required
             />
+            <span
+              className={
+                errors.email
+                  ? 'profile__input-error profile__input-error_visible profile__input-error_under'
+                  : 'profile__input-error'
+              }
+            >
+              {errors.email && 'Поле не заполнено или неверный формат email'}
+            </span>
           </label>
 
-          <button className="profile__submit-button" type="submit">
+          <button
+            className="profile__submit-button"
+            // кнопка неактивна, когда:
+            // любое поле формы невалидно
+            // или введенные данные равны текущим данным пользователя
+            disabled={
+              (values['name'] === currentUser.name && values['email'] === currentUser.email) ||
+              !isValid
+                ? true
+                : false
+            }
+            type="submit"
+          >
             {props.submitButtonName}
           </button>
         </form>
 
-        <Link to={props.route} className="profile__link">
+        <Link to="/" className="profile__link" onClick={props.onSignOut}>
           {props.profileSignoutButtonText}
         </Link>
       </div>

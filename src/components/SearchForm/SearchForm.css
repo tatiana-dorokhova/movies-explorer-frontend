@@ -57,8 +57,26 @@
   grid-area: loope;
 }
 
-.search-form__input {
+.search-form__label {
   width: calc(100% - 64px); /* ширина инпута равна ширине формы без кнопки */
+  position: relative;
+}
+
+.search-form__input-error {
+  display: none;
+  position: absolute;
+  bottom: -40px;
+  color: red;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.search-form__input-error_visible {
+  display: block;
+}
+
+.search-form__input {
+  width: 100%;
   background: #f9f9f9;
   border: none;
   margin: 0;

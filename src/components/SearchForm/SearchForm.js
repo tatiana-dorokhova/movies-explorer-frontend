@@ -1,29 +1,72 @@
 // форма поиска, куда пользователь будет вводить запрос
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import React, { useState, useEffect } from 'react';
 
 function SearchForm(props) {
+  const [isSearchInputEmpty, setIsSearchInputEmpty] = useState(false);
+  const [searchFieldValue, setSearchFieldValue] = useState(null);
+
+  const [isShortFilmSelected, setIsShortFilmSelected] = useState(false);
+
+  useEffect(() => {
+    if (props.lastSearchQuery) {
+      setIsSearchInputEmpty(false);
+      setSearchFieldValue(props.lastSearchQuery);
+      setIsShortFilmSelected(props.isShortFilmsOn);
+    }
+  }, [props.lastSearchQuery, props.isShortFilmsOn]);
+
+  const handleShortFilmToggle = () => {
+    setIsShortFilmSelected(!isShortFilmSelected);
+  };
+
+  const handleChange = (event) => {
+    setSearchFieldValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    if (!searchFieldValue) {
+      event.preventDefault();
+      setIsSearchInputEmpty(true);
+    } else {
+      event.preventDefault();
+      setIsSearchInputEmpty(false);
+      props.onSubmit({ searchQuery: searchFieldValue, shortFilms: isShortFilmSelected });
+    }
+  };
+
   return (
     <div className="search-form">
       <div className="search-form__container">
         <div className="search-form__icon"></div>
 
-        <form className="search-form__form">
-          <input
-            className="search-form__input"
-            type="text"
-            name="search-form-input"
-            placeholder="Фильм"
-            required
-          />
-          <button className="search-form__button"></button>
+        <form className="search-form__form" onSubmit={handleSubmit}>
+          <label className="search-form__label" htmlFor="search-form-input">
+            <input
+              className="search-form__input"
+              type="text"
+              value={searchFieldValue ?? props.lastSearchQuery}
+              onChange={handleChange}
+              name="search-form-input"
+              placeholder="Фильм"
+            />
+            <span
+              className={
+                isSearchInputEmpty
+                  ? 'search-form__input-error search-form__input-error_visible'
+                  : 'search-form__input-error'
+              }
+            >
+              Нужно ввести ключевое слово
+            </span>
+          </label>
+
+          <button className="search-form__button" type="submit"></button>
         </form>
 
         <div className="search-form__switcher">
-          <FilterCheckbox
-            isOn={props.isOn}
-            onSwitcherToggle={props.onSwitcherToggle}
-          />
+          <FilterCheckbox isOn={isShortFilmSelected} onSwitcherToggle={handleShortFilmToggle} />
           <p className="search-form__caption">Короткометражки</p>
         </div>
       </div>

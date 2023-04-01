@@ -3,27 +3,20 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
 import React from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
+import { EXTERNAL_API_URL } from '../../utils/constants';
+import { formatDuration } from '../../utils/MoviesHandler';
 
 function MoviesCard(props) {
   const location = useLocation();
 
-  const currentUser = React.useContext(CurrentUserContext);
-
-  // для отображения по роуту /movies делаем признак, сохранен фильм или нет
-  const isSavedByThisUser = props.movie.owner._id === currentUser._id;
-
-  const moviesButtonClassName = `movies-card__button${
-    isSavedByThisUser ? '' : ' movies-card__button_marked'
-  }`;
-
-  const savedMoviesButtonClassName =
-    'movies-card__button movies-card__button_remove';
-
-  const movieButtonClassName =
-    location.pathname === '/movies'
-      ? moviesButtonClassName
-      : savedMoviesButtonClassName;
+  // вычисляем класс кнопки
+  const movieButtonClassName = () => {
+    if (location.pathname === '/movies') {
+      return `movies-card__button${props.isMovieSaved ? '' : ' movies-card__button_marked'}`;
+    }
+    return 'movies-card__button movies-card__button_remove';
+  };
 
   function handleSaveButtonClick() {
     props.onMovieSave(props.movie);
@@ -38,26 +31,34 @@ function MoviesCard(props) {
       <div className="movies-card__header">
         <div className="movies-card__info">
           <h3 className="movies-card__film-name">{props.movie.nameRU}</h3>
-          <div className="movies-card__film-duration">
-            {props.movie.duration}
-          </div>
+          <div className="movies-card__film-duration">{formatDuration(props.movie.duration)}</div>
         </div>
         <button
-          className={movieButtonClassName}
+          className={movieButtonClassName()}
           type="button"
           onClick={
-            location.pathname === '/movies'
+            location.pathname === '/movies' && !props.isMovieSaved
               ? handleSaveButtonClick
               : handleRemoveButtonClick
           }
         ></button>
       </div>
-      <img
-        className="movies-card__image"
-        src={props.movie.thumbnail}
-        alt={props.movie.name}
-        // onClick={handleImageClick}
-      />
+      <a
+        className="movies-card__image-container"
+        href={props.movie.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="movies-card__image"
+          src={
+            location.pathname === '/movies'
+              ? `${EXTERNAL_API_URL}${props.movie.image.url}`
+              : `${props.movie.image}`
+          }
+          alt={props.movie.nameRU}
+        />
+      </a>
     </article>
   );
 }
